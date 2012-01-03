@@ -4,7 +4,7 @@ $project_categories = get_categories(array('type' => 'project', 'exclude' => '1'
 $projects = get_project_posts();
 ?>
     <section id="work">
-        <? Utils::svgTitle('Work', 81); ?>
+        <? vestride_svg_title('Work', 81); ?>
         <div class="filter clearfix">
             <ul class="filter-options">
                 <li class="active" data-key="all">Most Recent</li>
@@ -14,7 +14,7 @@ $projects = get_project_posts();
             </ul>
         </div>
         
-        <div id="grid" class="clearfix">
+        <div id="grid">
             
             <?php foreach ($projects as $project): ?>
             <div class="item" data-key='<?= json_encode($project->category_slugs); ?>'>
@@ -35,4 +35,6 @@ $projects = get_project_posts();
             
             <?php endforeach; ?>
         </div>
+        
+        <div class="paginate-controls"></div>
     </section>

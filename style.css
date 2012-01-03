@@ -1,14 +1,12 @@
-/* 
- * HTML5 ✰ Boilerplate
- *
- * What follows is the result of much research on cross-browser styling. 
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- *
- * Detailed information about this CSS: h5bp.com/css
- * 
- * ==|== normalize ==========================================================
- */
+/*
+Theme Name: Vestride
+Theme URI: http://eightfoldstudios.com
+Description: This is the theme for eightfoldstudios.com, based off the html5boilerplate
+Author: Glen Cheney
+Version: 1.0
+License: GNU General Public License
+License URI: license.txt
+*/
 
 
 /* =============================================================================
@@ -243,10 +241,10 @@ td { vertical-align: top; }
     font-weight: 400;
     padding-left: 10px;
     padding-top: 7px;
-    margin: 18px 0;
+    margin: 30px 0;
     
     color: #F0F0F0;
-    background-color: #0aaac8;
+    background-color: #0AAAC8;
     box-shadow: 4px 4px 0 #2d2d2d;
     text-shadow: 1px 1px 1px #1293AC;
     
@@ -280,19 +278,19 @@ h2::after {
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 10px solid #0aaac8;
+    border-top: 10px solid #0AAAC8;
     bottom: -10px;
     left: 20px;
 }
 
 h2.inverted {
     background-color: #2d2d2d;
-    box-shadow: 4px 4px 0 #0aaac8;
+    box-shadow: 4px 4px 0 #0AAAC8;
     text-shadow: 1px 1px 1px #1293AC;
 }
 
 h2.inverted::before {
-    border-top-color: #0aaac8;
+    border-top-color: #0AAAC8;
 }
 
 h2.inverted::after {
@@ -304,7 +302,7 @@ h2.short {
 }
 
 h3 {
-    color: #0aaac8;
+    color: #0AAAC8;
     font-size: 30px;
     font-weight: 400;
 }
@@ -312,15 +310,6 @@ h3 {
 h5 {
     color: #0AAAC8;
     font-weight: 300;
-}
-
-hgroup {
-    margin: 10px 0;
-}
-
-hgroup h3,
-hgroup h5 {
-    margin: 0;
 }
 
 p {
@@ -543,33 +532,6 @@ p {
     height: 26px; /* same as SVG heights */
 }
 
-.flexbox .quick-tiles {
-    display: -ms-box;
-    display: -webkit-box;
-    display: -moz-box;
-    display: box;
-
-    -ms-box-orient: horizontal;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    box-orient: horizontal;
-
-    -ms-box-align: start;
-    -webkit-box-align: start;
-    -moz-box-align: start;
-    box-align: start;
-
-    -ms-box-direction: normal;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    box-direction: normal;
-
-    -ms-box-pack: justify;
-    -webkit-box-pack: justify;
-    -moz-box-pack: justify;
-    box-pack: justify;
-}
-
 .box-link {
     position: relative;
     display: block;
@@ -578,10 +540,7 @@ p {
     width: 230px;
     margin-right: 20px;
     
-    -ms-box-flex: 1;
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    box-flex: 1;
+    float: left;
     
      -moz-transition: all 0.2s ease-out;
        -o-transition: all 0.2s ease-out;
@@ -610,115 +569,64 @@ p {
     color: #0F0F0F;
 }
 
-section header h1 {
+.section-title {
+    font-size: 30px;
     height: 41px; /** natural height is 36px, but <text> height is 41px...**/
     margin-bottom: 20px;
     border-bottom: 1px solid #2D2D2D;
 }
 
 /* bottom border on title */
-section header h1 > * {
+.section-title > * {
     border-bottom: 5px solid #0AAAC8;
     padding-bottom: 5px;
     position: relative;
-    top: 6px;
-}
-
-.section-title {
-    font-size: 30px;
+    top: 7px;
 }
 
 /*=============================================*\
  $About
 \*=============================================*/
  
-.about-us > section {
-    margin: 0 20px;
-}
-.about-us > section:first-child {
-    margin-left: 0;
-}
-.about-us > section:last-child {
-    margin-right: 0;
+.about-us .hero {
+    border: 8px solid #2D2D2D;
+    box-shadow: 5px 5px 8px rgba(0,0,0,0.75);
 }
 
-.flexbox .about-us {
-    display: -ms-box;
-    display: -webkit-box;
-    display: -moz-box;
-    display: box;
-
-    -ms-box-orient: horizontal;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    box-orient: horizontal;
-
-    -ms-box-align: start;
-    -webkit-box-align: start;
-    -moz-box-align: start;
-    box-align: start;
-
-    -ms-box-direction: normal;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    box-direction: normal;
-
-    -ms-box-pack: justify;
-    -webkit-box-pack: justify;
-    -moz-box-pack: justify;
-    box-pack: justify;
+.aboutus-info {
+    margin: 50px 0;
 }
 
-.flexbox .whoweare {
-    width: 300px;
-    
-    -ms-box-flex: 1;
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    box-flex: 1;
-
-    -ms-box-ordinal-group: 1;
-    -webkit-box-ordinal-group: 1;
-    -moz-box-ordinal-group: 1;
-    box-ordinal-group: 1;
+.aboutus-title {
+    font-size: 30px;
+    display: block;
+    color: #F0F0F0;
 }
 
-.flexbox .whatwedo {
-    width: 300px;
-    
-    -ms-box-flex: 1;
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    box-flex: 1;
-
-    -ms-box-ordinal-group: 2;
-    -webkit-box-ordinal-group: 2;
-    -moz-box-ordinal-group: 2;
-    box-ordinal-group: 2;
+.aboutus-subtitle {
+    font-size: 16px;
+    color: #0AAAC8;
+    display: block;
 }
 
-.flexbox .whywedoit {
-    width: 300px;
-    
-    -ms-box-flex: 1;
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    box-flex: 1;
-
-    -ms-box-ordinal-group: 3;
-    -webkit-box-ordinal-group: 3;
-    -moz-box-ordinal-group: 3;
-    box-ordinal-group: 3;
+.aboutus-details {
+    width: 640px;
 }
 
-/* Clearfix */
-.no-flexbox .about-us:before, .no-flexbox .about-us:after { content: ""; display: table; }
-.no-flexbox .about-us:after { clear: both; }
-.no-flexbox .about-us { zoom: 1; }
+.aboutus-details.details-with-title .aboutus-subtitle {
+    margin-bottom: 20px;
+}
 
-.no-flexbox .about-us > section {
+.aboutus-overview ul {
+    margin-top: 20px;
+}
+
+.aboutus-overview li {
     float: left;
-    width: 300px;
+}
+
+.aboutus-overview li a {
+    
 }
 
 .services .plus {
@@ -943,6 +851,42 @@ section header h1 > * {
     opacity: 0;
 }
 
+#grid .item.stage-center {
+    opacity: 1;
+}
+
+#grid .item.stage-right {
+    opacity: .2;
+}
+
+#grid .item.stage-left {
+    opacity: .2;
+}
+.shuffle-controls span {
+    text-indent: -9999px;
+    
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    
+    width: 15px;
+    height: 15px;
+    background-color: #2d2d2d;
+    margin: 0 10px 0 0;
+    display: block;
+    float: left;
+    
+    -moz-box-shadow: 0 2px 3px #000 inset;
+    -webkit-box-shadow: 0 2px 3px #000 inset;
+    box-shadow: 0 2px 3px #000 inset;
+    
+    outline: none;
+}
+
+.shuffle-controls span.active {
+    background-color: #0AAAC8;
+}
+
 #grid .pane {
     color: #F0F0F0;
     width: 230px;
@@ -1021,70 +965,28 @@ section header h1 > * {
 /*=============================================*\
  $Contact
 \*=============================================*/
-/* Styles for browsers that support flexbox */
-.flexbox .flexy {
-    display: -ms-box;
-    display: -webkit-box;
-    display: -moz-box;
-    display: box;
 
-    -ms-box-orient: horizontal;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    box-orient: horizontal;
-
-    -ms-box-align: stretch;
-    -webkit-box-align: stretch;
-    -moz-box-align: stretch;
-    box-align: stretch;
-
-    -ms-box-orientation: normal;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    box-direction: normal;
-
-    -ms-box-pack: start;
-    -webkit-box-pack: start;
-    -moz-box-pack: start;
-    box-pack: start;
-}
-
-.flexbox .flexy > div {
-    /*margin: 10px;*/
+.contact {
+    margin-top: 30px;
 }
 
 .follow-us {
     margin-right: 40px;
+    width: 230px;
 }
 
-.flexbox .flexy .follow-us {
-    -ms-box-ordinal-group: 1;
-    -webkit-box-ordinal-group: 1;
-    -moz-box-ordinal-group: 1;
-    box-ordinal-group: 1;
-    width: 300px;
-}
-
-.flexbox .flexy .contact-form {
-    -ms-box-ordinal-group: 2;
-    -webkit-box-ordinal-group: 2;
-    -moz-box-ordinal-group: 2;
-    box-ordinal-group: 2;
-    width: 640px;
-}
-
-.no-flexbox .flexy .follow-us {
-    width: 300px;
-}
-
-.no-flexbox .flexy .contact-form {
+.contact-form {
     float: right;
     width: 640px;
 }
 
-.no-flexbox .flexy .contact-form h2 {
+.contact-form h2, .follow-us h2 {
     margin-top: 0;
 }
+
+/*=============================================*\
+ $Contact Form
+\*=============================================*/
 
 .contact-form .error-notification {
     padding: 0;
@@ -1124,13 +1026,9 @@ section header h1 > * {
           transition: all 0.2s ease-out;
 }
 
-.input-dark-short {
-    width: 140px;
-}
-
 textarea.input-dark {
     width: 605px;
-    height: 144px;
+    height: 120px;
     padding: 3px;
     
     background-position: 535px 3px;
@@ -1150,12 +1048,25 @@ textarea.input-dark {
     background-image: url(img/icon-person.png);
 }
 
+/*
+#f-name::before {
+    content: url(img/icon-person.png);
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 32px;
+    height: 32px;
+}
+*/
+
+
 #f-subject {
     background-image: url(img/icon-subject.png);
 }
 
-#f-company {
-    background-image: url(img/icon-tag.png);
+#f-phone {
+    background-image: url(img/icon-phone.png);
 }
 
 #f-email {
@@ -1170,8 +1081,17 @@ textarea.input-dark {
     background-position: 605px -50px;
 }
 
-.contact-form p {
-    margin-bottom: 21px;
+.contact-form .greeting {
+    margin: 0 0 38px;
+    font-size: 19px;
+    border-top: 2px solid #2D2D2D;
+    border-bottom: 2px solid #2D2D2D;
+    padding: 15px 0;
+}
+
+.contact-form p:last-of-type {
+    float: left;
+    margin-left: 34px;
 }
 
 .contact-form .input-wrapper {
@@ -1183,16 +1103,6 @@ textarea.input-dark {
     margin-bottom: 5px;
 }
 
-.contact-form .input-wrapper-human {
-    float: right;
-    margin-right: 20px;
-    font-size: 12px;
-}
-
-.contact-form .input-wrapper-human label {
-    text-indent: 34px;
-}
-
 .contact-form .loading {
     position: absolute;
     margin-right: 15px;
@@ -1200,24 +1110,23 @@ textarea.input-dark {
 }
 
 .contact-form .send {
+    cursor: pointer;
+    outline: 0;
     float: right;
     position: relative;
-    
-     -moz-transition: all 0.2s ease-out;
-       -o-transition: all 0.2s ease-out;
-  -webkit-transition: all 0.2s ease-out;
-      -ms-transition: all 0.2s ease-out;
-          transition: all 0.2s ease-out;
+    background: url('img/envelope.png') no-repeat 0 0;
+    width: 100px;
+    height: 97px;
 }
 
-#contact-submit {
-    cursor: pointer;
-    height: 53px;
-    width: 110px;
-    text-align: center;
-    vertical-align: middle;
-    display: table-cell;
-    padding: 0;
+.contact-form .send:hover, .contact-form .send:focus {
+    background-position: 0 -102px;
+}
+
+.contact-form .send.closed {
+    background-position: 0 -214px;
+    margin-top: 40px;
+    height: 57px;
 }
 
 .classy-button {
@@ -1241,6 +1150,10 @@ textarea.input-dark {
     text-shadow: 1px 1px 0 #F0F0F0;
 }
 
+/*=============================================*\
+ $Follow us
+\*=============================================*/
+
 .follow-us a {
     float: left; /* If white-space-collapse was available, we would use that instead */
     height: 114px;
@@ -1250,7 +1163,7 @@ textarea.input-dark {
     text-indent: -999em;
     background-color: #2D2D2D;
     outline: 0;
-    background-image: url(img/follow-sprite-turquoise.png);
+    background-image: url(img/sprites.png);
     background-repeat: no-repeat;
     position: relative;
 }
@@ -1265,7 +1178,7 @@ textarea.input-dark {
     left: 0;
     height: 114px;
     width: 114px;
-    background-image: url(img/follow-sprite-turquoise.png);
+    background-image: url(img/sprites.png);
     background-repeat: no-repeat;
     opacity: 0;
     
@@ -1285,47 +1198,47 @@ textarea.input-dark {
 }
 
 .follow-us .facebook span {
-    background-position: -150px 0;
+    background-position: -232px 0;
 }
 
 .follow-us .twitter {
-    background-position: -300px 0;
+    background-position: -116px 0;
 }
 
 .follow-us .twitter span {
-    background-position: -450px 0;
+    background-position: -348px 0;
 }
 
 .follow-us .xbox {
-    background-position: 0 -198px;
+    background-position: 0 -232px;
 }
 
 .follow-us .xbox span {
-    background-position: -150px -198px;
+    background-position: -232px -232px;
 }
 
 .follow-us .linkedin {
-    background-position: -300px -99px;
+    background-position: -116px -116px;
 }
 
 .follow-us .linkedin span {
-    background-position: -450px -99px;
+    background-position: -348px -116px;
 }
 
 .follow-us .youtube {
-    background-position: -300px -198px;
+    background-position: -116px -232px;
 }
 
 .follow-us .youtube span {
-    background-position: -450px -198px;
+    background-position: -348px -232px;
 }
 
 .follow-us .googleplus {
-    background-position: 0 -99px;
+    background-position: 0 -116px;
 }
 
 .follow-us .googleplus span {
-    background-position: -150px -99px;
+    background-position: -232px -116px;
 }
 
 .arrow-container .arrow-down {

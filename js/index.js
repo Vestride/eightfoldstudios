@@ -28,12 +28,6 @@ $(document).ready(function() {
     // Set up ajax form
     Vestride.initContactSubmit();
     
-    /*
-    $('.carousel-container').blockbox({
-        navFilter : '.carousel-container ul a'
-    });
-    */
-    
     $('#grid').blockbox({
         navFilter : '.filtered .item-details a'
     });

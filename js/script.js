@@ -255,7 +255,7 @@ var Vestride = {
     },
 
     adjustSvgTitles : function() {
-        $('h1 svg').each(function() {
+        $('.section-title svg').each(function() {
             var $this = $(this),
                 width = $this.find('text').outerWidth();
             $this.attr('width', width);
@@ -329,9 +329,10 @@ var Vestride = {
             $('.filter-title').text($this.text());
 
             // Filter elements
-            $grid.shuffle({key : $this.attr('data-key')});
+            $grid.paginate('paginate', $this.attr('data-key'));
         });
-        $('#grid').shuffle({
+        
+        $('#grid').paginate({
             itemWidth : 230,
             margins : 20,
             key : 'all'
@@ -361,6 +362,12 @@ var Vestride = {
         
         var $submit = $('#contact-submit');
         
+        $submit.keyup(function(evt) {
+            if (evt.which === 13) {
+                $submit.trigger('click');
+            }
+        });
+        
         $submit.click(function(event) {
             event.preventDefault();
             
@@ -369,11 +376,10 @@ var Vestride = {
                 $notification = $form.find('.notification'),
                 ok = true,
                 errors = [],
-                message = {},
-                spinner = new Spinner(Vestride.spinnerOpts);
+                message = {}
             
             Vestride.hideContactErrors($notification);
-
+            /*
             $formElements.each(function() {
                 var type = this.type,
                     name = this.name,
@@ -414,22 +420,18 @@ var Vestride = {
                     return false;
                 }
                 
-                if (name === 'human' && value != 5) {
+                if (name === 'name' && value !== "") {
                     this.focus();
-                    $(this).parent().find('.arrow-container').addClass('invalid');
-                    ok = false;
-                    var result = value ? value : 'nothing';
-                    errors.push("2 + 3 ≠ " + result);
+                    errors.push("Are you sure you're not a bot? You should not have been able to change that field");
                     return false;
                 }
                 
                 message[name] = value;
             });
-            
+            */
             if (ok) {
-                $submit.text('');
-                spinner.spin($submit.get(0));
-                $(spinner.el).css('top', 'auto');
+                $submit.addClass('closed');
+                /*
                 $.ajax({
                     url : Vestride.themeUrl + "/libs/ajax.php",
                     dataType : 'json',
@@ -469,10 +471,10 @@ var Vestride = {
                         });
                     },
                     complete : function() {
-                        spinner.stop();
-                        $submit.text('Send!');
+                        console.log('complete');
                     }
                 });
+                */
             } else {
                 // Show errors
                 Vestride.displayContactErrors(errors, $notification);
@@ -556,4 +558,5 @@ var Vestride = {
 
 $(document).ready(function(){
     Vestride.fullscreenImage();
+    Vestride.adjustSvgTitles();
 });

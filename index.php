@@ -12,7 +12,7 @@
  * @subpackage Vestride
  */
 get_header();
-Utils::header('home');
+vestride_header('home');
 ?>
 <div class="backdrop">
     <div class="backdrop-inside">
@@ -29,10 +29,8 @@ Utils::header('home');
 <div id="main" class="homepage" role="main">
     <div id="sections">
         <section id="home" class="home">
-            <header>
-                <h1><span class="home-title text-right rfloat"></span></h1>
-            </header>
-            <div class="quick-tiles">
+            <h3 class="section-title"><span class="home-title text-right rfloat"></span></h3>
+            <div class="clearfix">
                 <a href="#work" class="box-link" data-title="Recent Work"></a>
                 <a href="#downloads" class="box-link" data-title="Downloads"></a>
                 <a href="#blog" class="box-link" data-title="Blog"></a>
@@ -40,11 +38,16 @@ Utils::header('home');
             </div>
         </section>
         
-        <? require_once(get_template_directory() . '/featured.php'); ?>
-        <? require_once(get_template_directory() . '/aboutus.php'); ?>
-        <? require_once(get_template_directory() . '/work.php'); ?>
-        <? require_once(get_template_directory() . '/contact.php'); ?>
-        <? require_once(get_template_directory() . '/blog.php'); ?>
+        <? 
+            $theme_options = vestride_get_theme_options();
+            if ($theme_options['featured'] === 'yes') {
+                get_template_part('featured');
+            }
+            get_template_part('aboutus');
+            get_template_part('work');
+            get_template_part('contact');
+            get_template_part('blog');
+        ?>
     </div>
 </div>
 <?php //get_sidebar(); ?>

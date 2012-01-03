@@ -34,7 +34,9 @@
       load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
     });*/
     
-    Vestride.themeUrl = '<? echo get_template_directory_uri(); ?>';
+    $(document).ready(function(){
+        Vestride.themeUrl = '<? echo get_template_directory_uri(); ?>';
+    });
     </script>
 
 

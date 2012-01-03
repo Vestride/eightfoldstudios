@@ -1,12 +1,13 @@
 
     <section id="contact">
-        <? Utils::svgTitle('Contact', 117); ?>
-        <div class="flexy">
+        <? vestride_svg_title('Contact', 117); ?>
+        <div class="contact">
             <div class="contact-form">
-                <h2>Get in Touch</h2>
-                <p>Have a comment or question? Just want to say hello? We would love to hear from you! Feel free to leave us a message by filling out our simple contact form!</p>
+                <h2>Message Us</h2>
+                <p class="greeting">Have a comment or question? Just want to say hello? We would love to hear from you!</p>
                 <form>
                     <div class="notification error-notification" style="display: none;"></div>
+                    <input type="hidden" name="name" value="" />
                     <div>
                         <div class="rfloat">
                             <div class="input-wrapper">
@@ -15,13 +16,13 @@
                             </div>
                             <div class="input-wrapper">
                                 <div class="arrow-container"><span class="arrow-down"></span></div>
-                                <input type="text" placeholder="Company" name="company" tabindex="4" class="input-dark" id="f-company" />
+                                <input type="tel" placeholder="Phone" name="phone" tabindex="4" class="input-dark" id="f-phone" />
                             </div>
                         </div>
                         <div>
                             <div class="input-wrapper">
                                 <div class="arrow-container"><span class="arrow-down"></span></div>
-                                <input type="text" placeholder="Name*" name="name" tabindex="1" required class="input-dark" id="f-name" />
+                                <input type="text" placeholder="Name*" name="actual_name" tabindex="1" required class="input-dark" id="f-name" />
                             </div>
                             <div class="input-wrapper">
                                 <div class="arrow-container"><span class="arrow-down"></span></div>
@@ -34,16 +35,11 @@
                         <textarea placeholder="Message*" name="message" tabindex="5" required class="input-dark" id="f-textarea"></textarea>
                     </div>
                     <div class="input-wrapper rfloat clearfix">
-                        <div class="send">
-                            <div class="classy-button" id="contact-submit" tabindex="7">Send!</div>
-                        </div>
-                        <div class="input-wrapper-human">
-                            <label for="f-human">Prove You&rsquo;re human</label>
-                            <br />
-                            <div class="arrow-container"><span class="arrow-down"></span></div>
-                            <input type="number" min="0" placeholder="What is 2 + 3?" name="human" tabindex="6" required class="input-dark input-dark-short" id="f-human" />
-                        </div>
+                        <div class="send ir" id="contact-submit" tabindex="6">Send!</div>
                     </div>
+                    <p class="main-color">
+                        <em>* Required fields</em>
+                    </p>
                 </form>
             </div>
             <div class="follow-us">

@@ -19,53 +19,6 @@ class Utils {
         return '<span id="page-title" class="hidden">' . self::pageTitle($pageTitle) . "</span>\n";
     }
 
-    public static function header($page = 'home') {
-        
-        ?>
-                <header>
-                    <nav id="nav" role="navigation">
-                        <ul>
-                            <li><?= self::headerLink('Home', '#main', 'home', $page) ?></li>
-                            <li><?= self::headerLink('About Us', '#about', 'about', $page); ?></li>
-                            <li><?= self::headerLink('Work', '#work', 'work', $page); ?></li>
-                            <li><?= self::headerLink('Contact', '#contact', 'contact', $page); ?></li>
-                            <li><?= self::headerLink('Blog', '#blog', 'blog', $page); ?></li>
-                        </ul>
-                    </nav>
-                </header>
-    <?
-    }
-
-    public static function headerLink($title, $href, $id, $page = '') {
-        $class = '';
-        if ($id == $page) {
-            $class = ' class="in"';
-        }
-        return "<a href=\"" . get_bloginfo('url') . "/$href\" id=\"a-$id\"$class>$title</a>";
-    }
-    
-    public static function svgTitle($title, $width = 138, $height = 25) {
-        ?>
-        <header>
-            <h1 class="section-title text-right">
-                <svg width="<?= $width; ?>" height="<?= $height; ?>" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                    <defs>
-                        <linearGradient id="gradientDefinition" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
-                            <stop offset="0%"   stop-color="#F0F0F0" />
-                            <stop offset="93%"  stop-color="#9E9E9E" />
-                            <stop offset="100%" stop-color="#F0F0F0" />
-                        </linearGradient>
-                    </defs>
-                    <text id="horizontalText" x="0" y="25" fill="url(#gradientDefinition)" >
-                        <?= $title; ?>
-                    </text>
-                </svg>
-            </h1>
-        </header>
-        
-        <?
-    }
-
     /**
      *
      * Converts character to html entities (aka from < to &lt;)
@@ -97,8 +50,12 @@ class Utils {
     public static function validateContactForm($message) {
         $errors = array();
 
-        if (empty($message->name)) {
-            $errors[] = "You have not entered a name!";
+        if (!empty($message->name)) {
+            $errors[] = "The name field is hidden and should have been blank!";
+        }
+        
+        if (empty($message->actual_name)) {
+            $errors[] = "You must entera value for Name";
         }
 
         // Validate email address is not empty or invalid
@@ -108,12 +65,6 @@ class Utils {
             $errors[] = "You have not entered a valid email address";
         }
 
-        if (empty($message->human)) {
-            $errors[] = "You must enter a value for the prove you&rsquo;re human.";
-        } else if ($message->human != 5) {
-            $errors[] = "2 + 3 is not " . $message->human;
-        }
-
         if (empty($message->message)) {
             $errors[] = "Please enter a message.";
         }
@@ -121,7 +72,8 @@ class Utils {
         return $errors;
     }
 
-    public static function sendContactMessage($message, $to = array('cheney.glen@gmail.com')) {
+    // TODO move to functions and use get_option('admin_email');
+    public static function sendContactMessage($message, $to = array('cheney.glen@gmail.com', 'jake.likewise@gmail.com')) {
         $headers = "From: {$message->email}" . "\r\n";
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
@@ -131,7 +83,7 @@ class Utils {
             $emailbody .= "<p><strong>" . ucfirst($field) . ": </strong> " . nl2br($value) . "</p>";
         }
 
-        $subject = $message->subject != '' ? $message->subject : 'New Inquiry';
+        $subject = $message->subject != '' ? $message->subject : 'New Inquiry at eighfoldstudios.com';
 
         $allGood = true;
         foreach ($to as $addr) {

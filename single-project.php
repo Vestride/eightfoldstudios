@@ -7,38 +7,6 @@
  * @since Vestride 1.0
  */
 
-/**
- * [ID] => 21
-    [post_author] => 2
-    [post_date] => 2011-09-09 16:57:33
-    [post_date_gmt] => 2011-09-09 16:57:33
-    [post_content] => The tennis ball is a 3d render using Photoshop and Cinema4D.
-    [post_title] => Tennis Ball
-    [post_excerpt] => My Tennis Ball. Took forever to get the fuzz to look right.
-    [post_status] => publish
-    [comment_status] => closed
-    [ping_status] => closed
-    [post_password] => 
-    [post_name] => tennis-ball
-    [to_ping] => 
-    [pinged] => 
-    [post_modified] => 2011-09-09 17:39:02
-    [post_modified_gmt] => 2011-09-09 17:39:02
-    [post_content_filtered] => 
-    [post_parent] => 0
-    [guid] => http://eightfoldstudios.com/wordpress/?post_type=project&p=21
-    [menu_order] => 0
-    [post_type] => project
-    [post_mime_type] => 
-    [comment_count] => 0
-    [ancestors] => Array
-        (
-        )
-
-    [filter] => raw
- */
-
-// How to avoid thumbnail?
 $args = array(
     'post_type' => 'attachment',
     'numberposts' => -1,
@@ -54,7 +22,7 @@ $hero_full = wp_get_attachment_image_src($hero_id, 'full');
 
 if (!Utils::is_ajax()) {
     get_header();
-    Utils::header('work');
+    vestride_header('work');
     ?>
 <div class="backdrop backdrop-small">
     <div class="city"></div>
