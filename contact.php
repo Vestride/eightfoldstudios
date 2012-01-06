@@ -8,39 +8,37 @@
                 <form>
                     <div class="notification error-notification" style="display: none;"></div>
                     <input type="hidden" name="name" value="" />
-                    <div>
+                    <div class="inputs">
                         <div class="rfloat">
                             <div class="input-wrapper">
                                 <div class="arrow-container"><span class="arrow-down"></span></div>
-                                <input type="text" placeholder="Subject" name="subject" tabindex="2" class="input-dark" id="f-subject" />
+                                <input type="text" data-placeholder="Subject" name="subject" tabindex="2" class="input-dark" id="f-subject" />
                             </div>
                             <div class="input-wrapper">
                                 <div class="arrow-container"><span class="arrow-down"></span></div>
-                                <input type="tel" placeholder="Phone" name="phone" tabindex="4" class="input-dark" id="f-phone" />
+                                <input type="tel" data-placeholder="Phone" name="phone" tabindex="4" class="input-dark" id="f-phone" />
                             </div>
                         </div>
-                        <div>
-                            <div class="input-wrapper">
-                                <div class="arrow-container"><span class="arrow-down"></span></div>
-                                <input type="text" placeholder="Name*" name="actual_name" tabindex="1" required class="input-dark" id="f-name" />
-                            </div>
-                            <div class="input-wrapper">
-                                <div class="arrow-container"><span class="arrow-down"></span></div>
-                                <input type="email" placeholder="Email*" name="email" tabindex="3" required class="input-dark" id="f-email" />
-                            </div>
+                        <div class="input-wrapper">
+                            <div class="arrow-container"><span class="arrow-down"></span></div>
+                            <input type="text" data-placeholder="Name*" name="actual_name" tabindex="1" required class="input-dark" id="f-name" />
+                        </div>
+                        <div class="input-wrapper">
+                            <div class="arrow-container"><span class="arrow-down"></span></div>
+                            <input type="email" data-placeholder="Email*" name="email" tabindex="3" required class="input-dark" id="f-email" />
+                        </div>
+                        <div class="textarea-container">
+                            <div class="arrow-container"><span class="arrow-down"></span></div>
+                            <textarea data-placeholder="Message*" name="message" tabindex="5" required class="input-dark" id="f-textarea"></textarea>
                         </div>
                     </div>
-                    <div class="textarea-container input-wrapper">
-                        <div class="arrow-container"><span class="arrow-down"></span></div>
-                        <textarea placeholder="Message*" name="message" tabindex="5" required class="input-dark" id="f-textarea"></textarea>
-                    </div>
-                    <div class="input-wrapper rfloat clearfix">
+                    <div class="send-wrapper">
                         <div class="send ir" id="contact-submit" tabindex="6">Send!</div>
                     </div>
-                    <p class="main-color">
-                        <em>* Required fields</em>
-                    </p>
                 </form>
+                <p class="main-color">
+                    <em>* Required fields</em>
+                </p>
             </div>
             <div class="follow-us">
                 <h2 class="short">Follow Us</h2>

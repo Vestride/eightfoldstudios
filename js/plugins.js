@@ -489,3 +489,34 @@ $.fn.spin = function(opts) {
   
     };
 })(jQuery);
+
+/**
+ * 
+ */
+$.fn.stickyholder = function() {
+    return this.each(function(){
+        var self = this,
+            $this = $(this),
+            text = $this.attr('data-placeholder'),
+            $label = $('<label for="' + this.id + '" class="sticky-placeholder">' + text + '</label>');
+
+        $this.after($label);
+        
+        $this.keydown(function(evt){
+            setTimeout(function() {
+                if (self.value === '') {
+                    $label.removeClass('has-text');
+                } else {
+                    $label.addClass('has-text');
+                }
+            }, 0);
+            
+        });
+
+        $this.blur(function(){
+            if (this.value === '') {
+                $label.removeClass('has-text');
+            }
+        });
+    });
+};

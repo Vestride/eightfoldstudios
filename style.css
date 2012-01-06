@@ -316,27 +316,8 @@ p {
     margin: 10px 0;
 }
 
-#container:before {
-    display: none;
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    z-index: 4;
-    
-     -moz-transition: all 0.2s ease-out;
-       -o-transition: all 0.2s ease-out;
-  -webkit-transition: all 0.2s ease-out;
-      -ms-transition: all 0.2s ease-out;
-          transition: all 0.2s ease-out;
-}
-
-#container.loading:before {
-    display: block;
-    background-color: rgba(15, 15, 15, .9);
+#container {
+    overflow: hidden;
 }
 
 
@@ -426,7 +407,7 @@ p {
     width: 100%;
     background-image: url(img/city.png);
     background-repeat: repeat-x;
-    background-position: 100px 0;
+    background-position: 370% 0;
     
     /*-webkit-animation: city 120s infinite linear;
     -moz-animation:    city 120s infinite linear;
@@ -980,7 +961,8 @@ p {
     width: 640px;
 }
 
-.contact-form h2, .follow-us h2 {
+.contact-form h2,
+.follow-us h2 {
     margin-top: 0;
 }
 
@@ -1029,7 +1011,6 @@ p {
 textarea.input-dark {
     width: 605px;
     height: 120px;
-    padding: 3px;
     
     background-position: 535px 3px;
     
@@ -1043,23 +1024,36 @@ textarea.input-dark {
     color: #0F0F0F;
 }
 
+.sticky-placeholder {
+    cursor: text;
+    position: absolute;
+    top: 9px;
+    left: 40px;
+    color: #F0F0F0;
+    opacity: 0.8;
+    
+     -moz-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+      -ms-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+}
+
+input:focus + .sticky-placeholder,
+textarea:focus + .sticky-placeholder {
+    color: #666666;
+    opacity: 0.5;
+}
+
+input + .sticky-placeholder.has-text,
+textarea + .sticky-placeholder.has-text  {
+    opacity: 0;
+}
+
 /* Background images for inputs */
 #f-name {
     background-image: url(img/icon-person.png);
 }
-
-/*
-#f-name::before {
-    content: url(img/icon-person.png);
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 5px;
-    width: 32px;
-    height: 32px;
-}
-*/
-
 
 #f-subject {
     background-image: url(img/icon-subject.png);
@@ -1094,32 +1088,36 @@ textarea.input-dark {
     margin-left: 34px;
 }
 
-.contact-form .input-wrapper {
+.contact-form .input-wrapper,
+.contact-form .textarea-container,
+.contact-form .send-wrapper {
     margin: 0 0 20px;
+    position: relative;
 }
 
-.contact-form label {
-    display: inline-block;
-    margin-bottom: 5px;
-}
-
-.contact-form .loading {
-    position: absolute;
-    margin-right: 15px;
-    margin-top: 4px;
+.contact-form .input-wrapper {
+    width: 300px;
 }
 
 .contact-form .send {
+    position: absolute;
+    right: 0;
+    top: 0;
     cursor: pointer;
     outline: 0;
-    float: right;
-    position: relative;
     background: url('img/envelope.png') no-repeat 0 0;
     width: 100px;
     height: 97px;
+    
+     -moz-transition: right 0.4s ease-in;
+       -o-transition: right 0.4s ease-in;
+  -webkit-transition: right 0.4s ease-in;
+      -ms-transition: right 0.4s ease-in;
+          transition: right 0.4s ease-in;
 }
 
-.contact-form .send:hover, .contact-form .send:focus {
+.contact-form .send:hover,
+.contact-form .send:focus {
     background-position: 0 -102px;
 }
 
@@ -1127,6 +1125,10 @@ textarea.input-dark {
     background-position: 0 -214px;
     margin-top: 40px;
     height: 57px;
+}
+
+.contact-form .send.animate {
+    right: -3000px;
 }
 
 .classy-button {

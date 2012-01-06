@@ -216,24 +216,31 @@ var Vestride = {
         fullHeight : null,
         minHeight : null,
         friction : 0.5,
-        $backdrop : null
-        
+        $backdrop : null,
+        centered : 370,
+        left : 120
     },
     
     initBackdrop : function() {
-        this.backdrop.fullHeight = $('.backdrop').height();
-        this.backdrop.minHeight = $('.backdrop .city').height() + 10
         this.backdrop.$backdrop = $('.backdrop');
+        this.backdrop.fullHeight = this.backdrop.$backdrop.height();
+        this.backdrop.minHeight = this.backdrop.$backdrop.find('.city').height() + 10;
     },
     
     modifyBackdrop : function() {
         var scrolled = $(window).scrollTop(),
-            newHeight = this.backdrop.fullHeight - (scrolled * this.backdrop.friction);
+            newHeight = this.backdrop.fullHeight - (scrolled * this.backdrop.friction),
+            percentScrolled = scrolled / this.backdrop.fullHeight,
+            backdropX = this.backdrop.centered - Math.round(percentScrolled * (this.backdrop.fullHeight - this.backdrop.minHeight));
         
         if (newHeight < this.backdrop.minHeight) newHeight = this.backdrop.minHeight;
+        if (backdropX < this.backdrop.left) backdropX = this.backdrop.left;
         
         // Move the text at the same speed as regular scrolling
         this.backdrop.$backdrop.children().first().css('bottom', scrolled);
+        
+        // Move the city over
+        this.backdrop.$backdrop.find('.city').css('background-position', backdropX + '% 0');
         
         // Move Backdrop at half speed
         this.backdrop.$backdrop.css('height', newHeight);
@@ -347,6 +354,9 @@ var Vestride = {
     },
 
     initContactSubmit : function() {
+        
+        // Add blur and focus events so we can change the class of the arrows
+        // to show if it's valid or invalid
         $('#contact input[type!="submit"], #contact textarea').focus(function() {
             $(this).parent().find('.arrow-down').addClass('active');
         }).blur(function(){
@@ -360,126 +370,158 @@ var Vestride = {
             }
         });
         
-        var $submit = $('#contact-submit');
+        var $submit = $('#contact-submit'),
+            $form = $('#contact form'),
+            $formElements = $form.find('input, textarea').not('[type=submit],[type=hidden]');
+            
+        $formElements.stickyholder();
         
+        // make it so hitting enter while the submit div is focused submits the data
         $submit.keyup(function(evt) {
+            // 13 == enter key
             if (evt.which === 13) {
-                $submit.trigger('click');
+                $form.submit();
             }
         });
         
-        $submit.click(function(event) {
-            event.preventDefault();
-            
-            var $form = $('#contact form'),
-                $formElements = $form.find('input[type!="submit"], textarea'),
-                $notification = $form.find('.notification'),
-                ok = true,
-                errors = [],
-                message = {}
-            
-            Vestride.hideContactErrors($notification);
-            /*
-            $formElements.each(function() {
-                var type = this.type,
-                    name = this.name,
-                    nameUp = ucFirst(name),
-                    required = this.getAttribute('required'),
-                    value = this.value;
+        // Add click event to submit div
+        $submit.click(function() {
+            $form.submit();
+        });
+        
+        $form.submit(Vestride.submitContact);
+    },
+    
+    submitContact : function(event) {
+        event.preventDefault();
 
-
-                // Check for html5 validity
-                if ((this.validity) && !this.validity.valid) {
-                    this.focus();
-                    ok = false;
-
-                    if (this.validity.valueMissing) {
-                        errors.push(nameUp + " must not be empty");
-                    }
-
-                    else if (this.validity.typeMismatch && type == 'email') {
-                        errors.push(nameUp + " is invalid");
-                    }
-                    
-                    return false;
-                }
-
-                // Check browser support for email type
-                if (type == 'email' && !Modernizr.inputtypes.email && !Vestride.email_is_valid(value)) {
-                    this.focus();
-                    ok = false;
-                    errors.push(nameUp + " is invalid");
-                    return false;
-                }
-                
-                // Make sure all required inputs have a value
-                if (required && !Modernizr.input.required && value == '') {
-                    this.focus();
-                    ok = false;
-                    errors.push(nameUp + ' is required');
-                    return false;
-                }
-                
-                if (name === 'name' && value !== "") {
-                    this.focus();
-                    errors.push("Are you sure you're not a bot? You should not have been able to change that field");
-                    return false;
-                }
-                
-                message[name] = value;
-            });
-            */
-            if (ok) {
+        var $submit = $('#contact-submit'),
+            $form = $('#contact form'),
+            $formElements = $form.find('input, textarea').not('[type=submit]'),
+            $notification = $form.find('.notification'),
+            ok = true,
+            errors = [],
+            message = {},
+            sendEnvelope = function() {
                 $submit.addClass('closed');
-                /*
-                $.ajax({
-                    url : Vestride.themeUrl + "/libs/ajax.php",
-                    dataType : 'json',
-                    data : 'method=sendContactMessage&data=' + JSON.stringify(message),
-                    success : function(response) {
-                        if (response.success === true) {
-                            Dialog.create({
-                                title: 'Message sent! =]',
-                                content: 'Your message has been sent successfully. We&rsquo;ll get back to you soon!',
-                                classes: ['success'],
-                                topPx: 135
-                            });
-                            
-                            // Clear the form is everything went ok
-                            $form.get(0).reset();
-                            $formElements.each(function() {
-                                $(this).parent().find('.arrow-container').removeClass('valid');
-                            });
-                            
-                        } else if (Array.isArray(response)) {
-                            Vestride.displayContactErrors(response, $notification);
-                        } else {
-                            Dialog.create({
-                                title: 'Technical Difficulties',
-                                content: 'Oops, something broke!',
-                                classes: ['error'],
-                                topPx: 135
-                            });
-                        }
-                    },
-                    error: function(response) {
+                setTimeout(function() {
+                    $submit.addClass('animate');
+                }, 400);
+            },
+            retrieveEnvelope = function() {
+                $submit.removeClass('animate');
+                setTimeout(function() {
+                    $submit.removeClass('closed');
+                }, 600);
+            };
+
+        Vestride.hideContactErrors($notification);
+        /*
+        $formElements.each(function() {
+            if ($(this).hasClass('holding')) {
+                $(this).val('');
+            }
+            var type = this.type,
+                name = this.name,
+                nameUp = ucFirst(name),
+                required = this.getAttribute('required'),
+                value = this.value;
+
+
+            // Check for html5 validity
+            if ((this.validity) && !this.validity.valid) {
+                this.focus();
+                ok = false;
+
+                if (this.validity.valueMissing) {
+                    errors.push(nameUp + " must not be empty");
+                }
+
+                else if (this.validity.typeMismatch && type == 'email') {
+                    errors.push(nameUp + " is invalid");
+                }
+
+                return false;
+            }
+
+            // Check browser support for email type
+            if (type == 'email' && !Modernizr.inputtypes.email && !Vestride.email_is_valid(value)) {
+                this.focus();
+                ok = false;
+                errors.push(nameUp + " is invalid");
+                return false;
+            }
+
+            // Make sure all required inputs have a value
+            if (required && !Modernizr.input.required && value == '') {
+                this.focus();
+                ok = false;
+                errors.push(nameUp + ' is required');
+                return false;
+            }
+
+            if (name === 'name' && value !== "") {
+                this.focus();
+                errors.push("Are you sure you're not a bot? You should not have been able to change that field");
+                return false;
+            }
+
+            message[name] = value;
+        });
+        */
+        if (ok) {
+            sendEnvelope();
+            /*
+            $.ajax({
+                url : Vestride.themeUrl + "/libs/ajax.php",
+                dataType : 'json',
+                data : 'method=sendContactMessage&data=' + JSON.stringify(message),
+                success : function(response) {
+                    if (response.success === true) {
+                        Dialog.create({
+                            title: 'Message sent! =]',
+                            content: 'Your message has been sent successfully. We&rsquo;ll get back to you soon!',
+                            classes: ['success'],
+                            topPx: 135
+                        });
+
+                        // Clear the form is everything went ok
+                        $form.get(0).reset();
+                        $formElements.each(function() {
+                            $(this).parent().find('.arrow-container').removeClass('valid');
+                        });
+
+                    } else if (Array.isArray(response)) {
+                        Vestride.displayContactErrors(response, $notification);
+                        retrieveEnvelope();
+                    } else {
+                        retrieveEnvelope();
                         Dialog.create({
                             title: 'Technical Difficulties',
                             content: 'Oops, something broke!',
                             classes: ['error'],
                             topPx: 135
                         });
-                    },
-                    complete : function() {
-                        console.log('complete');
                     }
-                });
-                */
-            } else {
-                // Show errors
-                Vestride.displayContactErrors(errors, $notification);
-            }
-        });
+                },
+                error: function(response) {
+                    retrieveEnvelope();
+                    Dialog.create({
+                        title: 'Technical Difficulties',
+                        content: 'Oops, something broke!',
+                        classes: ['error'],
+                        topPx: 135
+                    });
+                },
+                complete : function() {
+                    console.log('complete');
+                }
+            });
+            */
+        } else {
+            // Show errors
+            Vestride.displayContactErrors(errors, $notification);
+        }
     },
     
     displayContactErrors : function(errors, $notification) {
