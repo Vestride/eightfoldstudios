@@ -19,7 +19,7 @@ $jl->title = $jl_title[0] . ' <strong>' . $jl_title[1] . '</strong>';
 
 ?>
     <section id="about">
-        <? vestride_svg_title('About Us'); ?>
+        <h3 class="section-title text-right"><span>About Us</span></h3>
         <div class="about-us">
             <img class="hero" src="<?= get_template_directory_uri(); ?>/img/aboutus-hero.png" alt="An Eightfold Production" />
             

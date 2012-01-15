@@ -12,30 +12,32 @@
  * @subpackage Vestride
  */
 get_header();
+
 vestride_header('home');
+
+get_template_part('backdrop');
 ?>
-<div class="backdrop">
-    <div class="backdrop-inside">
-        <h1>
-            <a id="tagline-es" href="<?= bloginfo('url'); ?>"><img src="<?= get_template_directory_uri(); ?>/img/es.png" alt="Eightfold Studios" /></a>
-            <span id="tagline-welcome" class="tagline">Welcome</span>
-            <span id="tagline-to" class="tagline">to</span>
-            <span id="tagline-eightfold" class="tagline">Eightfold</span>
-            <span id="tagline-studios" class="tagline">Studios</span>
-        </h1>
-    </div>
-    <div class="city"></div>
-</div>
+
 <div id="main" class="homepage" role="main">
     <div id="sections">
         <section id="home" class="home">
-            <h3 class="section-title"><span class="home-title text-right rfloat"></span></h3>
-            <div class="clearfix">
-                <a href="#work" class="box-link" data-title="Recent Work"></a>
-                <a href="#downloads" class="box-link" data-title="Downloads"></a>
-                <a href="#blog" class="box-link" data-title="Blog"></a>
-                <a href="#contact" class="box-link" data-title="Message"></a> 
-            </div>
+            <h3 class="section-title"><span class="home-title rfloat"></span></h3>
+            <nav class="quick-tiles">
+                <ul>
+                    <li>
+                        
+                        <a href="#about">Who We Are<span>Who We Are</span></a>
+                    </li><li>
+                        
+                        <a href="#work">Recent Work<span>Recent Work</span></a>
+                    </li><li>
+                        
+                        <a href="#downloads">Freebies<span>Freebies</span></a>
+                    </li><li>
+                        <a href="#blog">Blog<span>Blog</span></a>
+                    </li>
+                </ul>
+            </nav>
         </section>
         
         <? 

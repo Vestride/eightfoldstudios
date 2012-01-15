@@ -215,32 +215,45 @@ var Vestride = {
     backdrop : {
         fullHeight : null,
         minHeight : null,
+        availableToScroll : null,
         friction : 0.5,
         $backdrop : null,
-        centered : 370,
-        left : 120
+        $city : null,
+        centered : 0,
+        left : -180
     },
     
     initBackdrop : function() {
         this.backdrop.$backdrop = $('.backdrop');
+        this.backdrop.$city = this.backdrop.$backdrop.find('.city');
         this.backdrop.fullHeight = this.backdrop.$backdrop.height();
-        this.backdrop.minHeight = this.backdrop.$backdrop.find('.city').height() + 10;
+        this.backdrop.minHeight = this.backdrop.$city.height() + 10;
+        this.backdrop.availableToScroll = this.backdrop.fullHeight - this.backdrop.minHeight;
     },
     
     modifyBackdrop : function() {
         var scrolled = $(window).scrollTop(),
             newHeight = this.backdrop.fullHeight - (scrolled * this.backdrop.friction),
-            percentScrolled = scrolled / this.backdrop.fullHeight,
-            backdropX = this.backdrop.centered - Math.round(percentScrolled * (this.backdrop.fullHeight - this.backdrop.minHeight));
+            amountScrolledWithFriction,
+            leftToScroll,
+            percentScrolled,
+            backdropX;
+            
         
         if (newHeight < this.backdrop.minHeight) newHeight = this.backdrop.minHeight;
-        if (backdropX < this.backdrop.left) backdropX = this.backdrop.left;
+        
+        leftToScroll = newHeight - this.backdrop.minHeight;
+        amountScrolledWithFriction = this.backdrop.availableToScroll - leftToScroll;
+        percentScrolled = amountScrolledWithFriction / this.backdrop.availableToScroll;
+        backdropX = this.backdrop.centered + Math.round(percentScrolled * this.backdrop.left);
+        
+        if (backdropX < this.backdrop.left) newHeight = this.backdrop.left;
         
         // Move the text at the same speed as regular scrolling
         this.backdrop.$backdrop.children().first().css('bottom', scrolled);
         
         // Move the city over
-        this.backdrop.$backdrop.find('.city').css('background-position', backdropX + '% 0');
+        this.backdrop.$city.css('background-position', backdropX + 'px 0');
         
         // Move Backdrop at half speed
         this.backdrop.$backdrop.css('height', newHeight);
@@ -259,14 +272,6 @@ var Vestride = {
         
         this.modifyBackdrop();
         
-    },
-
-    adjustSvgTitles : function() {
-        $('.section-title svg').each(function() {
-            var $this = $(this),
-                width = $this.find('text').outerWidth();
-            $this.attr('width', width);
-        });
     },
 
     initCycle : function(anchorBuilder, selector) {
@@ -416,17 +421,18 @@ var Vestride = {
             };
 
         Vestride.hideContactErrors($notification);
-        /*
+        
         $formElements.each(function() {
             if ($(this).hasClass('holding')) {
                 $(this).val('');
             }
             var type = this.type,
                 name = this.name,
-                nameUp = ucFirst(name),
-                required = this.getAttribute('required'),
+                nameUp = this.getAttribute('data-placeholder'),
+                required = this.getAttribute('required') != null,
                 value = this.value;
 
+            nameUp = nameUp != null ? nameUp.replace('*', '') : ucFirst(name);
 
             // Check for html5 validity
             if ((this.validity) && !this.validity.valid) {
@@ -441,7 +447,7 @@ var Vestride = {
                     errors.push(nameUp + " is invalid");
                 }
 
-                return false;
+                return;
             }
 
             // Check browser support for email type
@@ -449,7 +455,7 @@ var Vestride = {
                 this.focus();
                 ok = false;
                 errors.push(nameUp + " is invalid");
-                return false;
+                return;
             }
 
             // Make sure all required inputs have a value
@@ -457,23 +463,21 @@ var Vestride = {
                 this.focus();
                 ok = false;
                 errors.push(nameUp + ' is required');
-                return false;
+                return;
             }
 
             if (name === 'name' && value !== "") {
-                this.focus();
+                ok = false;
                 errors.push("Are you sure you're not a bot? You should not have been able to change that field");
-                return false;
+                return;
             }
 
             message[name] = value;
         });
-        */
         if (ok) {
             sendEnvelope();
-            /*
             $.ajax({
-                url : Vestride.themeUrl + "/libs/ajax.php",
+                url : Vestride.themeUrl + "/ajax.php",
                 dataType : 'json',
                 data : 'method=sendContactMessage&data=' + JSON.stringify(message),
                 success : function(response) {
@@ -486,16 +490,12 @@ var Vestride = {
                         });
 
                         // Clear the form is everything went ok
-                        $form.get(0).reset();
-                        $formElements.each(function() {
-                            $(this).parent().find('.arrow-container').removeClass('valid');
-                        });
+                        $form[0].reset();
+                        $form.find('.arrow-container').removeClass('valid invalid');
 
                     } else if (Array.isArray(response)) {
                         Vestride.displayContactErrors(response, $notification);
-                        retrieveEnvelope();
                     } else {
-                        retrieveEnvelope();
                         Dialog.create({
                             title: 'Technical Difficulties',
                             content: 'Oops, something broke!',
@@ -505,7 +505,6 @@ var Vestride = {
                     }
                 },
                 error: function(response) {
-                    retrieveEnvelope();
                     Dialog.create({
                         title: 'Technical Difficulties',
                         content: 'Oops, something broke!',
@@ -514,10 +513,10 @@ var Vestride = {
                     });
                 },
                 complete : function() {
-                    console.log('complete');
+                    retrieveEnvelope();
                 }
             });
-            */
+            
         } else {
             // Show errors
             Vestride.displayContactErrors(errors, $notification);
@@ -525,7 +524,7 @@ var Vestride = {
     },
     
     displayContactErrors : function(errors, $notification) {
-        var html = '<ul>',
+        var html = '<h4>Sorry, we couldn\'t send your message.</h4><ul>',
             prop;
         for (prop in errors) {
             html += '<li>' + errors[prop] + '</li>';
@@ -600,5 +599,4 @@ var Vestride = {
 
 $(document).ready(function(){
     Vestride.fullscreenImage();
-    Vestride.adjustSvgTitles();
 });

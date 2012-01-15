@@ -20,31 +20,14 @@ $hero_id = $attachments[1] == null ? $attachments[0]->ID : $attachments[1]->ID;
 $hero = wp_get_attachment_image($hero_id, 'work-promo');
 $hero_full = wp_get_attachment_image_src($hero_id, 'full');
 
-if (!Utils::is_ajax()) {
+if (!vestride_is_ajax()) {
     get_header();
     vestride_header('work');
+    get_template_part('backdrop', 'small');
     ?>
-<div class="backdrop backdrop-small">
-    <div class="city"></div>
-</div>
 <div id="main">
     <section class="project">
-        <header>
-            <h1 class="section-title text-right">
-                <svg width="153" height="25" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                    <defs>
-                        <linearGradient id="gradientDefinition" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
-                            <stop offset="0%"   stop-color="#F0F0F0" />
-                            <stop offset="93%"  stop-color="#9E9E9E" />
-                            <stop offset="100%" stop-color="#F0F0F0" />
-                        </linearGradient>
-                    </defs>
-                    <text id="horizontalText" x="0" y="25" fill="url(#gradientDefinition)" >
-                        <?= strtoupper($post->post_title); ?>
-                    </text>
-                </svg>
-            </h1>
-        </header>
+        <h3 class="section-title text-right"><span><?= $post->post_title; ?></span></h3>
         <div class="project-preview clearfix">
             <section class="project-sidebar project-specs lfloat">
                 <div class=" lfloat"></div>
@@ -90,7 +73,6 @@ if (!Utils::is_ajax()) {
     <script>
     $(document).ready(function() {
         Vestride.onHomePage = false;
-        Vestride.adjustSvgTitles();
     });
     </script>
     <?

@@ -1,15 +1,15 @@
 <?php
 
 // es/wordpress/wp-load.php
-// es/wordpress/wp-content/themes/vestride/libs/ajax.php
-require_once('../../../../wp-load.php');
+// es/wordpress/wp-content/themes/vestride/ajax.php
+require_once('../../../wp-load.php');
 
 function sendContactMessage($data, $ip) {
     $data = json_decode($data);
     //$data = urldecode($data);
-    $errors = Utils::validateContactForm($data);
+    $errors = vestride_validate_contact_form($data);
     if (empty($errors)) {
-        $success = Utils::sendContactMessage($data);
+        $success = vestride_send_contact_message($data);
         $return = new stdClass();
         $return->success = $success;
         return json_encode($return);

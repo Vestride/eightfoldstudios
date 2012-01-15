@@ -4,7 +4,7 @@ $project_categories = get_categories(array('type' => 'project', 'exclude' => '1'
 $projects = get_project_posts();
 ?>
     <section id="work">
-        <? vestride_svg_title('Work', 81); ?>
+        <h3 class="section-title text-right"><span>Work</span></h3>
         <div class="filter clearfix">
             <ul class="filter-options">
                 <li class="active" data-key="all">Most Recent</li>

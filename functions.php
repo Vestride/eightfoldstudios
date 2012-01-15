@@ -498,31 +498,9 @@ function vestride_header_link($title, $href, $id, $page = '') {
     return "<a href=\"" . get_bloginfo('url') . "/$href\" id=\"a-$id\"$class>$title</a>";
 }
 
-function vestride_svg_title($title, $width = 138, $height = 25) {
-    static $gradientDefined = false;
-    
-    if (!$gradientDefined) : ?>
-        <svg width="1" height="25" xmlns="http://www.w3.org/2000/svg" version="1.1" style="position:absolute;z-index:0;">
-            <defs>
-                <linearGradient id="gradientDefinition" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%"   stop-color="#F0F0F0" />
-                    <stop offset="93%"  stop-color="#9E9E9E" />
-                    <stop offset="100%" stop-color="#F0F0F0" />
-                </linearGradient>
-            </defs>
-        </svg>
-        
-    <? endif;
-    $gradientDefined = true;
-    ?>
-    <h3 class="section-title text-right">
-        <svg width="<?= $width; ?>" height="<?= $height; ?>" xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <text x="0" y="25" fill="url(#gradientDefinition)" >
-                <?= $title; ?>
-            </text>
-        </svg>
-    </h3>
-    <?
+
+function vestride_is_ajax() {
+    return isset($_GET['ajax']);
 }
 
 
@@ -535,4 +513,83 @@ add_image_size('work-promo', 480, 9999);
 add_image_size('work-thumb', 9999, 145);
 add_image_size('featured', 980, 9999);
 
-require_once(get_template_directory() . '/libs/Utils.class.php');
+/**
+ *
+ * Converts character to html entities (aka from < to &lt;)
+ * replaces anything found in the $blacklist array with nothing
+ * pads quotes with \
+ * trims the string
+ * @param $str string to sanitize
+ * @param $convertQuotes bool [optional] makes quotes html entities instead of escaping them
+ * @param $fwdSlashOk bool [optional] allow '/' in the string
+ * @return string safe string
+ */
+function vestride_sanitize_string($str, $convertQuotes = true, $fwdSlashOk = false) {
+    $blacklist = array("/`/", "/</", "/>/", "/%/", "/\\\/", "/\|/");
+    if (!$fwdSlashOk) {
+        $blacklist[] = "/\//";
+    }
+    $str = trim($str);
+    if ($convertQuotes) {
+        $str = htmlentities($str, ENT_QUOTES);
+    } else {
+        $str = htmlentities($str, ENT_NOQUOTES);
+        $str = str_replace('"', '\"', $str);
+        $str = str_replace("'", "\'", $str);
+    }
+    $str = preg_replace($blacklist, "", $str);
+    return $str;
+}
+
+function vestride_validate_contact_form($message) {
+    $errors = array();
+
+    if (!empty($message->name)) {
+        $errors[] = "The name field is hidden and should have been blank!";
+    }
+
+    if (empty($message->actual_name)) {
+        $errors[] = "You must entera value for Name";
+    }
+
+    // Validate email address is not empty or invalid
+    if (empty($message->email)) {
+        $errors[] = "You have not entered an email address";
+    } elseif (!filter_var($message->email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "You have not entered a valid email address";
+    }
+
+    if (empty($message->message)) {
+        $errors[] = "Please enter a message.";
+    }
+
+    return $errors;
+}
+
+function vestride_send_contact_message($message) {
+    $to = array(
+        get_option('admin_email'),
+        'cheney.glen@gmail.com'
+    );
+    $headers = "From: {$message->email}" . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+    $emailbody = "<p>You have recieved a new message from the enquiries form on your website.</p>";
+
+    $message->name = $message->actual_name;
+    unset($message->actual_name);
+    foreach ($message as $field => $value) {
+        $emailbody .= "<p><strong>" . ucfirst($field) . ": </strong> " . nl2br($value) . "</p>";
+    }
+
+    $subject = $message->subject != '' ? $message->subject : 'New Inquiry at eighfoldstudios.com';
+
+    $allGood = true;
+    foreach ($to as $addr) {
+        if (!mail($addr, $subject, $emailbody, $headers)) {
+            $allGood = false;
+        }
+    }
+
+    return $allGood;
+}

@@ -1,6 +1,6 @@
 
     <section id="blog">
-        <? vestride_svg_title('Blog', 65); ?>
+        <h3 class="section-title text-right"><span>Blog</span></h3>
         
         <?php if (have_posts()) : ?>
 

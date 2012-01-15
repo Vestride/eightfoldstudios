@@ -1,6 +1,6 @@
 
     <section id="contact">
-        <? vestride_svg_title('Contact', 117); ?>
+        <h3 class="section-title text-right"><span>Contact</span></h3>
         <div class="contact">
             <div class="contact-form">
                 <h2>Message Us</h2>

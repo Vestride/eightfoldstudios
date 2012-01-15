@@ -2,7 +2,7 @@
 $featured_projects = get_featured_project_posts();
 ?>
     <section id="featured">
-        <? vestride_svg_title('Featured'); ?>
+        <h3 class="section-title text-right"><span>Featured</span></h3>
         <div class="carousel-container">
             <ul class="carousel">
                 <? foreach ($featured_projects as $project) : ?>

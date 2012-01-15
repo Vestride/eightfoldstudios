@@ -307,6 +307,13 @@ h3 {
     font-weight: 400;
 }
 
+h4 {
+    color: #F0F0F0;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 10px;
+}
+
 h5 {
     color: #0AAAC8;
     font-weight: 300;
@@ -377,7 +384,7 @@ p {
     top: 35px;
     left: 0;
     width: 100%;
-    height: 335px;
+    height: 380px;
     overflow: hidden;
     
     background-color: #033943;
@@ -389,9 +396,6 @@ p {
     background-image:         linear-gradient(top, #033943, #0aaac8);
 }
 
-.backdrop.backdrop-small {
-    height: 101px;
-}
 
 .backdrop-inside {
     position: relative;
@@ -407,70 +411,53 @@ p {
     width: 100%;
     background-image: url(img/city.png);
     background-repeat: repeat-x;
-    background-position: 370% 0;
-    
-    /*-webkit-animation: city 120s infinite linear;
-    -moz-animation:    city 120s infinite linear;
-    -ms-animation:     city 120s infinite linear;*/
+    background-position: 0 0;
 }
 
-/* Rotating city
-@-webkit-keyframes city {
-    0%   { background-position: 100px 0; }
-    100% { background-position: 1599px 0; }
+.backdrop-small {
+    height: 101px;
 }
-@-moz-keyframes city {
-    0%   { background-position: 100px 0; }
-    100% { background-position: 1599px 0; }
-}
-@-ms-keyframes city {
-    0%   { background-position: 100px 0; }
-    100% { background-position: 1599px 0; }
-}
-*/
 
-.backdrop h1 {
-    margin: 0;
+.backdrop-small .city {
+    background-position: -180px 0;
 }
 
 .tagline {
-    position: absolute;
+    position: relative;
+    width: 760px;
+    margin: 120px auto 0;
+}
+
+.tagline > * {
+    
+}
+
+.tagline-img {
+    float: left;
+    margin-right: 30px;
+    box-shadow: 0px 0px 60px -5px rgba(0, 0, 0, .75);
+}
+
+.tagline-strong {
+    color: #F0F0F0;
+    font-size: 65px;
     font-weight: 800;
+    text-shadow: 0px 0px 50px rgba(0, 0, 0, .75);
     text-transform: uppercase;
 }
 
-#tagline-es {
-    position: absolute;
-    top: 30px;
-    left: 0;
-}
-
-#tagline-welcome {
-    top: 10px;
-    left: 210px;
-    color: #0F0F0F;
-    font-size: 70px;
-}
-
-#tagline-to {
-    top: 35px;
-    left: 600px;
+.tagline-thin {
     color: #F0F0F0;
-    font-size: 45px;
+    font-size: 65px;
+    font-weight: 300;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, .75);
+    text-transform: uppercase;
 }
 
-#tagline-eightfold {
-    top: 75px;
-    left: 215px;
-    color: #F0F0F0;
-    font-size: 120px;
-}
-
-#tagline-studios {
-    top: 185px;
-    left: 400px;
-    color: #0F0F0F;
-    font-size: 100px;
+.tagline-subtitle {
+   font-style: italic;
+   color: #043C47;
+   margin-top: -10px;
 }
 
 #main {
@@ -488,12 +475,12 @@ p {
 }
 
 #main.homepage {
-    margin: 405px auto auto;
+    margin: 450px auto auto;
 }
 
 #main.homepage:before {
-    height: 405px;
-    margin: -405px 0 0;
+    height: 450px;
+    margin: -450px 0 0;
 }
 
 #sections > section {
@@ -510,59 +497,93 @@ p {
 
 #main .home .home-title {
     width: 230px; /* same as tiles */
-    height: 26px; /* same as SVG heights */
+    top: -3px;
 }
 
-.box-link {
-    position: relative;
-    display: block;
-    background-color: #2d2d2d;
-    height: 185px;
-    width: 230px;
+.quick-tiles li {
     margin-right: 20px;
-    
-    float: left;
-    
-     -moz-transition: all 0.2s ease-out;
-       -o-transition: all 0.2s ease-out;
-  -webkit-transition: all 0.2s ease-out;
-      -ms-transition: all 0.2s ease-out;
-          transition: all 0.2s ease-out;
+    position: relative;
+    display: inline-block;
 }
 
-.box-link:last-child {
+.quick-tiles li:last-child {
     margin-right: 0;
 }
 
-.box-link:link {color: #0F0F0F;}
-.box-link:visited {color: #0F0F0F;}
-.box-link:hover {color: #0F0F0F; background-color: #0aaac8;}
-
-.box-link:before {
-    content: attr(data-title);
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    font-size: 25px;
+.quick-tiles li * {
+    display: inline-block;
+    background-repeat: no-repeat;
+    height: 230px;
+    width: 230px;
+    font-size: 30px;
+    padding-left: 15px;
+    padding-top: 190px;
+    
+     -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+    
+     -moz-transition: opacity 0.2s ease-out;
+       -o-transition: opacity 0.2s ease-out;
+  -webkit-transition: opacity 0.2s ease-out;
+      -ms-transition: opacity 0.2s ease-out;
+          transition: opacity 0.2s ease-out;
 }
 
-.box-link:hover:before {
+.quick-tiles a {
+    background-position: top;
+    background-color: #2d2d2d;
     color: #0F0F0F;
+    opacity: 1;
+}
+
+.quick-tiles span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    color: #F0F0F0;
+    background-color: #0AAAC8;
+    background-position: bottom;
+}
+
+
+.quick-tiles a:hover span {
+    opacity: 1;
+}
+
+.quick-tiles li:nth-child(1) * {
+    background-image: url(img/question-mark.png);
+}
+
+.quick-tiles li:nth-child(2) * {
+    /*background-image: url(img/question-mark.png);*/
+}
+
+.quick-tiles li:nth-child(3) * {
+    background-image: url(img/download.png);
+}
+
+.quick-tiles li:nth-child(4) * {
+    background-image: url(img/comment-bubbles.png);
 }
 
 .section-title {
-    font-size: 30px;
-    height: 41px; /** natural height is 36px, but <text> height is 41px...**/
+    font-size: 37px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #2D2D2D;
+    border-bottom: 2px solid #2D2D2D;
+    color: #F0F0F0;
+    font-weight: 800;
 }
 
-/* bottom border on title */
+/**
+ * bottom border on title. We have to wrap the text in a span to get the 
+ * width of the span instead of the block level element
+ */
 .section-title > * {
     border-bottom: 5px solid #0AAAC8;
-    padding-bottom: 5px;
     position: relative;
-    top: 7px;
+    top: -6px;
 }
 
 /*=============================================*\
@@ -973,7 +994,7 @@ p {
 .contact-form .error-notification {
     padding: 0;
     overflow: hidden;
-    margin-bottom: 9px;
+    margin-bottom: 20px;
     
      -moz-transition: all 0.2s ease-out;
        -o-transition: all 0.2s ease-out;
