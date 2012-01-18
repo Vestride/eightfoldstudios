@@ -93,8 +93,8 @@ if (!vestride_is_ajax()) {
             <div class=" lfloat"></div>
             <div class=" lfloat"></div>
             <div class=" lfloat"></div>
-            <div class="blockbox-nav blockbox-nav-prev lfloat"></div>
-            <div class="blockbox-nav blockbox-nav-next lfloat"></div>
+            <div class="blockbox-nav nav-prev lfloat"></div>
+            <div class="blockbox-nav nav-next lfloat"></div>
         </section>
 
         <section class="project-details lfloat">

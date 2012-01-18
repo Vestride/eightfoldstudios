@@ -1,5 +1,5 @@
 <?php
-$featured_projects = get_featured_project_posts();
+$featured_projects = vestride_get_featured_project_posts();
 ?>
     <section id="featured">
         <h3 class="section-title text-right"><span>Featured</span></h3>
@@ -7,7 +7,7 @@ $featured_projects = get_featured_project_posts();
             <ul class="carousel">
                 <? foreach ($featured_projects as $project) : ?>
                 <li>
-                    <a href="<? echo $project->permalink; ?>"  data-title="<? echo $project->post_title; ?>" data-categories="<? echo $project->categories; ?>">
+                    <a href="<? echo $project->permalink; ?>"  data-title="<? echo $project->post_title; ?>" data-categories='<? echo json_encode($project->categories); ?>'>
                         <? echo $project->img; ?>
                     </a>
                 </li>

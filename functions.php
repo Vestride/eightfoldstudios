@@ -419,11 +419,11 @@ add_action('save_post', 'save_details');
  * @param string $img_size size of the thumbnail. Default = 'work-thumb'
  * @param bool $onlyFeatured only retrieve projects that are 'featured'. Default = false.
  */
-function get_project_posts($posts_per_page = null, $img_size = 'work-thumb', $onlyFeatured = false) {
+function vestride_get_project_posts($posts_per_page = null, $img_size = 'work-thumb', $onlyFeatured = false) {
     
     $args = array(
         'post_type' => 'project',
-        'numberposts' => $numberposts
+        'numberposts' => $posts_per_page
     );
     
     if ($onlyFeatured) {
@@ -442,7 +442,8 @@ function get_project_posts($posts_per_page = null, $img_size = 'work-thumb', $on
             $category_slugs[] = $cat->slug;
         }
 
-        $project->categories = implode(', ', $category_names);
+        //$project->categories = implode(', ', $category_names);
+        $project->categories = $category_names;
         $project->category_slugs = $category_slugs;
         $project->img = get_the_post_thumbnail($project->ID, $img_size);
         $project->permalink = get_permalink($project->ID);
@@ -451,8 +452,8 @@ function get_project_posts($posts_per_page = null, $img_size = 'work-thumb', $on
     return $projects;
 }
 
-function get_featured_project_posts() {
-    return get_project_posts(null, 'featured', true);
+function vestride_get_featured_project_posts() {
+    return vestride_get_project_posts(null, 'featured', true);
 }
 
 function get_the_categories($delimiter = ' ', $post_id = false) {

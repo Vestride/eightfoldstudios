@@ -331,7 +331,7 @@ var Vestride = {
     },
 
     initWorkFiltering : function() {
-        $('.filter-options li').click(function() {
+        $('.filter-options li').not('.paginate-nav').click(function() {
             var $this = $(this),
                 $grid = $('#grid');
 
