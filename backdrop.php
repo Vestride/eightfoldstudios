@@ -11,11 +11,9 @@ $es->title_2 = $es_title[1];
     <div class="backdrop-inside">
         <h1 class="tagline">
             <a class="tagline-img" href="<?= bloginfo('url'); ?>">
-                <img src="<?= get_template_directory_uri(); ?>/img/es-square.png" alt="<? echo $es->title_1 . ' ' . $es->title_2; ?>" />
+                <img src="<?= get_template_directory_uri(); ?>/img/es.svg" alt="<? echo $es->title_1 . ' ' . $es->title_2; ?>" width="168" height="168" />
             </a>
-            <span class="tagline-strong"><? echo $es->title_1; ?></span>
-            <span class="tagline-thin"><? echo $es->title_2; ?></span>
-            <div class="tagline-subtitle text-right"><? echo $es->subtitle; ?></div>
+            <div class="tagline-title"><? echo $es->title_1 . ' ' . $es->title_2; ?></div>
         </h1>
     </div>
     <div class="city"></div>

@@ -364,7 +364,7 @@
                 $(data.nextClass).removeClass('can-nav');
             }
             
-            this.parent().find(data.controls + ' span').each(function(index){
+            $(data.controls + ' span').each(function(index){
                 if (toIndex != index) $(this).removeClass('active');
                 else $(this).addClass('active');
             });
@@ -380,8 +380,8 @@
                 data = $this.data(paginate),
                 $controls = $(data.controls),
                 pages = Math.ceil(total / (data.itemsPerRow * data.numRows)),
-                $ctrl = $controls.first(),
-                ctrlsWidth = (($ctrl.css('width') + $ctrl.css('margin-right')) * pages) - $ctrl.css('margin-right'),
+                $ctrl,
+                ctrlsWidth,
                 html = '',
                 i = 0;
                 
@@ -389,7 +389,10 @@
                 html += '<span data-index="' + i + '">' + (i + 1) + '</span>';
             }
             
-            $controls.html(html).css('width', ctrlsWidth);
+            $controls.html(html);
+            $ctrl = $controls.children().first();
+            ctrlsWidth = (($ctrl.width() + parseInt($ctrl.css('marginRight'))) * pages) - parseInt($ctrl.css('marginRight'));
+            $controls.css('width', ctrlsWidth);
         }
     };
     

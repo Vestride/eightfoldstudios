@@ -56,15 +56,24 @@ if (!vestride_is_ajax()) {
                 <div class=" lfloat"></div>
             </section>
         </div>
-        <div class="project-info clearfix">
-            <div class="project-overview lfloat">
-                <h3>Overview</h3>
-                <p><? echo $post->post_excerpt; ?></p>
+        <section class="section-info clearfix">
+            <div class="section-details rfloat">
+                <article><?= $post->post_excerpt; ?></article>
             </div>
-            <div class="project-content">
-                <? echo $post->post_content; ?>
+            <div class="section-overview">
+                <span class="article-title">Overview</span>
+                <span class="article-subtitle"><?= $post->post_title; ?></span>
             </div>
-        </div>
+        </section>
+        <section class="section-info clearfix">
+            <div class="section-details rfloat">
+                <article><?= $post->post_content; ?></article>
+            </div>
+            <div class="section-overview">
+                <span class="article-title">Challenges</span>
+                <span class="article-subtitle"><?= $post->post_title; ?></span>
+            </div>
+        </section>
     </section>
 </div>
     <?

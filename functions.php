@@ -5,8 +5,8 @@
  * For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API
  *
  * @package WordPress
- * @subpackage Twenty_Eleven
- * @since Twenty Eleven 1.0
+ * @subpackage Vestride
+ * @since Vestride 1.0
  */
 
 /**
@@ -298,6 +298,42 @@ function vestride_body_classes($classes) {
 add_filter( 'body_class', 'vestride_body_classes' );
 
 
+function create_person_post_type() {
+    $labels = array(
+        'name' => __('People'),
+        'singular_name' => __('Person'),
+        'menu_name' => __('People'),
+        'add_new' => __( 'Add New' ),
+        'add_new_item' => __( 'Add New Person' ),
+        'edit' => __( 'Edit' ),
+        'edit_item' => __( 'Edit Person' ),
+        'new_item' => __( 'New Person' ),
+        'view' => __( 'View' ),
+        'view_item' => __( 'View Person' ),
+        'search_items' => __( 'Search People' ),
+        'not_found' => __( 'No people found' ),
+        'not_found_in_trash' => __( 'No people found in Trash' ),
+        'parent' => __( 'Parent Person' )
+    );
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true, 
+        'show_in_menu' => true, 
+        'query_var' => true,
+        'rewrite' => true,
+        'capability_type' => 'post',
+        'has_archive' => false, 
+        'hierarchical' => false,
+        'menu_position' => 4,
+        'supports' => array('title','editor','thumbnail','excerpt'),
+        'taxonomies' => array()
+    ); 
+    register_post_type('person',$args);
+}
+add_action( 'init', 'create_person_post_type' );
+
 function create_project_post_type() {
     $labels = array(
         'name' => __('Projects'),
@@ -317,8 +353,8 @@ function create_project_post_type() {
     );
     $args = array(
         'labels' => $labels,
-        'public' => true,
-        'publicly_queryable' => true,
+        'public' => false,
+        'publicly_queryable' => false,
         'show_ui' => true, 
         'show_in_menu' => true, 
         'query_var' => true,
@@ -337,6 +373,7 @@ add_action( 'init', 'create_project_post_type' );
 function project_init() {
     add_meta_box("year_completed_meta", "Year Completed", "year_completed", "project", "side", "low");
     add_meta_box("credits_meta", "Additional Info", "add_info_meta", "project", "normal", "low");
+    add_meta_box('person_meta', 'Person Details', 'add_person_meta', 'person', 'normal', 'high');
 }
 add_action("admin_init", "project_init");
 
@@ -403,13 +440,117 @@ function add_info_meta() {
     <?php
 }
 
-
-function save_details() {
+function add_person_meta() {
     global $post;
-    update_post_meta($post->ID, "year_completed", $_POST["year_completed"]);
-    update_post_meta($post->ID, "featured", $_POST["featured"]);
-    update_post_meta($post->ID, "client", $_POST["client"]);
-    update_post_meta($post->ID, "programs", $_POST["programs"]);
+    $custom = get_post_custom($post->ID);
+    $fname = $custom["fname"][0];
+    $lname = $custom["lname"][0];
+    $position = $custom['position'][0];
+    $featured = $custom["featured"][0];
+    $order = $custom['order'][0];
+    $facebook = $custom["facebook"][0];
+    $twitter = $custom["twitter"][0];
+    $xbox = $custom['xbox'][0];
+    $youtube = $custom['youtube'][0];
+    $github = $custom['github'][0];
+    $linkedin = $custom['linkedin'][0];
+    $googleplus = $custom['googleplus'][0];
+    ?>
+        <h2>Personal Info</h2>
+        <p>
+            <label for="first_name_meta"><strong>First Name:</strong></label>
+            <br />
+            <input id="first_name_meta" name="fname" value="<?php echo $fname; ?>" />
+        </p>
+        <p>
+            <label for="last_name_meta"><strong>Last Name:</strong></label>
+            <br />
+            <input id="last_name_meta" name="lname" value="<?php echo $lname; ?>" />
+        </p>
+        <p>
+            <label for="position_meta"><strong>Position:</strong></label>
+            <br />
+            <input id="position_meta" name="position" value="<?php echo $position; ?>" />
+        </p>
+        
+        <h2>Feature person in About us section</h2>
+        <p>
+            <label>
+                <input type="checkbox" name="featured" value="featured" <? echo $featured === 'featured' ? 'checked' : ''; ?> />
+                Featured
+            </label>
+            <br />
+            <em>For featured people, the order in which they show up in the about us section. 1 is high.</em>
+            <br />
+            <label for="order_meta"><strong>Order:</strong></label>
+            <br />
+            <input id="order_meta" name="order" value="<?php echo $order; ?>" />
+        </p>
+        
+        <h2>Social Links</h2>
+        <em>Only four (4) of these will be visible! If you don&#39;t want one, leave it blank!</em>
+        <p>
+            <label for="facebook_meta"><strong>Facebook:</strong></label>
+            <br />
+            <input id="facebook_meta" name="facebook" value="<?php echo $facebook; ?>" />
+        </p>
+        <p>
+            <label for="twitter_meta"><strong>Twitter:</strong></label>
+            <br />
+            <input id="twitter_meta" name="twitter" value="<?php echo $twitter; ?>" />
+        </p>
+        <p>
+            <label for="xbox_meta"><strong>Xbox LIVE:</strong></label>
+            <br />
+            <input id="xbox_meta" name="xbox" value="<?php echo $xbox; ?>" />
+        </p>
+        <p>
+            <label for="youtube_meta"><strong>YouTube:</strong></label>
+            <br />
+            <input id="youtube_meta" name="youtube" value="<?php echo $youtube; ?>" />
+        </p>
+        <p>
+            <label for="github_meta"><strong>Github:</strong></label>
+            <br />
+            <input id="github_meta" name="github" value="<?php echo $github; ?>" />
+        </p>
+        <p>
+            <label for="linkedin_meta"><strong>LinkedIn:</strong></label>
+            <br />
+            <input id="linkedin_meta" name="linkedin" value="<?php echo $linkedin; ?>" />
+        </p>
+        <p>
+            <label for="googleplus_meta"><strong>Google Plus:</strong></label>
+            <br />
+            <input id="googleplus_meta" name="googleplus" value="<?php echo $googleplus; ?>" />
+        </p>
+    <?php
+}
+
+
+function save_details($post_id) {
+    $post = get_post($post_id);
+    if (!wp_is_post_revision($post_id)) {
+        if ($post->post_type === 'project') {
+            update_post_meta($post_id, "year_completed", $_POST["year_completed"]);
+            update_post_meta($post_id, "featured", $_POST["featured"]);
+            update_post_meta($post_id, "client", $_POST["client"]);
+            update_post_meta($post_id, "programs", $_POST["programs"]);
+        } else if ($post->post_type === 'person') {
+            update_post_meta($post_id, "fname", $_POST["fname"]);
+            update_post_meta($post_id, "lname", $_POST["lname"]);
+            update_post_meta($post_id, "position", $_POST["position"]);
+            update_post_meta($post_id, "featured", $_POST["featured"]);
+            update_post_meta($post_id, "order", $_POST["order"]);
+            update_post_meta($post_id, "facebook", $_POST["facebook"]);
+            update_post_meta($post_id, "twitter", $_POST["twitter"]);
+            update_post_meta($post_id, "xbox", $_POST["xbox"]);
+            update_post_meta($post_id, "youtube", $_POST["youtube"]);
+            update_post_meta($post_id, "github", $_POST["github"]);
+            update_post_meta($post_id, "linkedin", $_POST["linkedin"]);
+            update_post_meta($post_id, "googleplus", $_POST["googleplus"]);
+        }
+    }
 }
 add_action('save_post', 'save_details');
 
@@ -454,6 +595,50 @@ function vestride_get_project_posts($posts_per_page = null, $img_size = 'work-th
 
 function vestride_get_featured_project_posts() {
     return vestride_get_project_posts(null, 'featured', true);
+}
+
+function vestride_get_people($onlyFeatured = false) {
+    
+    $args = array(
+        'post_type' => 'person'
+    );
+    
+    if ($onlyFeatured) {
+        $args['meta_key'] = 'featured';
+    }
+    
+    $people = get_posts($args);
+    
+    
+    foreach ($people as &$person) {
+        $custom = get_post_custom($person->ID);
+        $person->fname = $custom["fname"][0];
+        $person->lname = $custom["lname"][0];
+        $person->position = $custom['position'][0];
+        $person->featured = $custom["featured"][0];
+        $person->order = $custom["order"][0] == '' ? 100 : $custom['order'][0];
+        
+        $person->social = array(
+            'facebook' => $custom["facebook"][0],
+            'twitter' => $custom["twitter"][0],
+            'xbox' => $custom['xbox'][0],
+            'youtube' => $custom['youtube'][0],
+            'github' => $custom['github'][0],
+            'linkedin' => $custom['linkedin'][0],
+            'googleplus' => $custom['googleplus'][0]
+        );
+    }
+    unset($person);
+    $order = array();
+    foreach ($people as $key => $row) {
+        $order[$key] = $row->order;
+    }
+    array_multisort($order, SORT_ASC, $people);
+    return $people;
+}
+
+function vestride_get_featured_people() {
+    return vestride_get_people(true);
 }
 
 function get_the_categories($delimiter = ' ', $post_id = false) {

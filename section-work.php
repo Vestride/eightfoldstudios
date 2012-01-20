@@ -4,7 +4,7 @@ $project_categories = get_categories(array('type' => 'project', 'exclude' => '1'
 $projects = vestride_get_project_posts();
 ?>
     <section id="work">
-        <h3 class="section-title text-right"><span>Work</span></h3>
+        <h3 class="section-title text-right"><span>Work<span class="title-icon icon-briefcase"></span></span></h3>
         <div class="paginate">
             <div class="filter">
                 <ul class="filter-options">
