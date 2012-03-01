@@ -22,10 +22,6 @@ get_template_part('backdrop');
     <div id="sections">
         <?
             get_template_part('section', 'home');
-            $theme_options = vestride_get_theme_options();
-            if ($theme_options['featured'] === 'yes') {
-                get_template_part('section', 'featured');
-            }
             get_template_part('section', 'aboutus');
             get_template_part('section', 'work');
             get_template_part('section', 'contact');

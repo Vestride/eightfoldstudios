@@ -17,10 +17,10 @@ $(document).ready(function() {
     });
     
     // Set up 'Featured' carousel
-    Vestride.initCycle('cycleWithLinks', '#featured .carousel');
+    Vestride.initCycle('cycleWithLinks', '.carousel');
 
     // Set up hovers over 'work' section
-    Vestride.initGridHover();
+    //Vestride.initGridHover();
     
     // Add work filter functionality
     Vestride.initWorkFiltering();

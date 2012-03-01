@@ -1,5 +1,5 @@
 <?
-$project_categories = get_categories(array('type' => 'project', 'exclude' => '1'));
+$project_categories = get_categories(array('type' => 'project', 'exclude' => '1', 'hide_empty' => 0));
 
 $projects = vestride_get_project_posts();
 ?>
@@ -7,10 +7,11 @@ $projects = vestride_get_project_posts();
         <h3 class="section-title text-right"><span>Work<span class="title-icon icon-briefcase"></span></span></h3>
         <div class="paginate">
             <div class="filter">
+                <h2 class="short">Most Recent</h2>
                 <ul class="filter-options">
-                    <li class="active" data-key="all">Most Recent</li>
+                    <li class="filter-option active" data-key="all"><div class="sprite sprite-recent"></div><span>Most Recent</span></li>
                     <? foreach ($project_categories as $cat) : ?>
-                    <li data-key="<?= $cat->slug; ?>"><?= $cat->name; ?></li>
+                    <li class="filter-option" data-key="<?= $cat->slug; ?>"><div class="sprite sprite-<?= $cat->slug; ?>"></div><span><?= $cat->name; ?></span></li>
                     <? endforeach; ?>
                     <li class="paginate-nav paginate-prev nav-prev"></li>
                     <li class="paginate-nav paginate-next nav-next"></li>
@@ -32,12 +33,14 @@ $projects = vestride_get_project_posts();
                             </div>
                         </a>
                     </div>
+                    <!--
                     <div class="pane">
                         <a href="<? echo $project->permalink; ?>">
                             <div class="pane-title"><?= $project->post_title; ?></div>
                             <span class="pane-view"><?= implode(', ', $project->categories); ?></span>
                         </a>
                     </div>
+                    -->
                 </div>
 
                 <?php endforeach; ?>

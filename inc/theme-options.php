@@ -59,13 +59,83 @@ function vestride_theme_options_do_page() {
         <form method="post" action="options.php">
             <?php settings_fields('vestride_options'); ?>
             <?php $options = get_option('vestride_theme_options'); ?>
-
+            
             <table class="form-table">
                 
                 <tr valign="top"><th scope="row"><?php _e('Use the featured section', 'vestride'); ?></th>
                     <td>
                         <input id="vestride_theme_options[featured]" name="vestride_theme_options[featured]" type="checkbox" value="1" <?php checked('yes', $options['featured']); ?> />
                         <label class="description" for="vestride_theme_options[featured]"><?php _e('Featured', 'vestride'); ?></label>
+                    </td>
+                </tr>
+                
+                <tr valign="top"><th scope="row"><?php _e('Twitter Username', 'vestride'); ?></th>
+                    <td>
+                        <input id="vestride_theme_options[twitter]" name="vestride_theme_options[twitter]" type="text" value="<?php echo $options['twitter']; ?>" />
+                        <label class="description" for="vestride_theme_options[twitter]"></label>
+                    </td>
+                </tr>
+                
+                <tr valign="top"><th scope="row"><?php _e('Facebook Username', 'vestride'); ?></th>
+                    <td>
+                        <input id="vestride_theme_options[facebook]" name="vestride_theme_options[facebook]" type="text" value="<?php echo $options['facebook']; ?>" />
+                        <label class="description" for="vestride_theme_options[facebook]"></label>
+                    </td>
+                </tr>
+                
+                <tr valign="top"><th scope="row"><?php _e('Vimeo Username', 'vestride'); ?></th>
+                    <td>
+                        <input id="vestride_theme_options[vimeo]" name="vestride_theme_options[vimeo]" type="text" value="<?php echo $options['vimeo']; ?>" />
+                        <label class="description" for="vestride_theme_options[vimeo]"></label>
+                    </td>
+                </tr>
+                
+                <tr valign="top"><th scope="row"><?php _e('Dribbble Username', 'vestride'); ?></th>
+                    <td>
+                        <input id="vestride_theme_options[dribbble]" name="vestride_theme_options[dribbble]" type="text" value="<?php echo $options['dribbble']; ?>" />
+                        <label class="description" for="vestride_theme_options[dribbble]"></label>
+                    </td>
+                </tr>
+                
+                <tr valign="top"><th scope="row"><?php _e('Flickr Username', 'vestride'); ?></th>
+                    <td>
+                        <input id="vestride_theme_options[flickr]" name="vestride_theme_options[flickr]" type="text" value="<?php echo $options['flickr']; ?>" />
+                        <label class="description" for="vestride_theme_options[flickr]"></label>
+                    </td>
+                </tr>
+                
+                <tr valign="top"><th scope="row"><?php _e('Google Plus Username', 'vestride'); ?></th>
+                    <td>
+                        <input id="vestride_theme_options[googleplus]" name="vestride_theme_options[googleplus]" type="text" value="<?php echo $options['googleplus']; ?>" />
+                        <label class="description" for="vestride_theme_options[googleplus]"></label>
+                    </td>
+                </tr>
+                
+                <tr valign="top"><th scope="row"><?php _e('YouTube Username', 'vestride'); ?></th>
+                    <td>
+                        <input id="vestride_theme_options[youtube]" name="vestride_theme_options[youtube]" type="text" value="<?php echo $options['youtube']; ?>" />
+                        <label class="description" for="vestride_theme_options[youtube]"></label>
+                    </td>
+                </tr>
+                
+                <tr valign="top"><th scope="row"><?php _e('LinkedIn Username', 'vestride'); ?></th>
+                    <td>
+                        <input id="vestride_theme_options[linkedin]" name="vestride_theme_options[linkedin]" type="text" value="<?php echo $options['linkedin']; ?>" />
+                        <label class="description" for="vestride_theme_options[linkedin]"></label>
+                    </td>
+                </tr>
+                
+                <tr valign="top"><th scope="row"><?php _e('GitHub Username', 'vestride'); ?></th>
+                    <td>
+                        <input id="vestride_theme_options[github]" name="vestride_theme_options[github]" type="text" value="<?php echo $options['github']; ?>" />
+                        <label class="description" for="vestride_theme_options[github]"></label>
+                    </td>
+                </tr>
+                
+                <tr valign="top"><th scope="row"><?php _e('Xbox LIVE Gamertag', 'vestride'); ?></th>
+                    <td>
+                        <input id="vestride_theme_options[gamertag]" name="vestride_theme_options[gamertag]" type="text" value="<?php echo $options['gamertag']; ?>" />
+                        <label class="description" for="vestride_theme_options[gamertag]"></label>
                     </td>
                 </tr>
 
@@ -86,10 +156,11 @@ function vestride_theme_options_validate($input) {
     // Our checkbox value is either 0 or 1
     if (!isset($input['featured']))
         $input['featured'] = null;
-    $input['featured'] = ($input['featured'] == '1' ? 'yes' : 'yes');
+    $input['featured'] = ($input['featured'] == '1') ? 'yes' : 'no';
 
     // Say our text option must be safe text with no HTML tags
-    //$input['sometext'] = wp_filter_nohtml_kses($input['sometext']);
+    $input['twitter'] = wp_filter_nohtml_kses($input['twitter']);
+    //  105688492908876684797
 
     // Our select option must actually be in our array of select options
     /*if (!array_key_exists($input['selectinput'], $select_options))

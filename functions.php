@@ -353,8 +353,8 @@ function create_project_post_type() {
     );
     $args = array(
         'labels' => $labels,
-        'public' => false,
-        'publicly_queryable' => false,
+        'public' => true,
+        'publicly_queryable' => true,
         'show_ui' => true, 
         'show_in_menu' => true, 
         'query_var' => true,
@@ -658,14 +658,9 @@ function vestride_header($page = 'home') {
     ?>
             <header>
                 <nav id="nav" role="navigation">
+                    <div class="logo"><img src="<?= get_template_directory_uri(); ?>/img/es.svg" alt="logo" width="28" /><strong>Eightfold</strong> <span class="main-color">Studios</span></div>
                     <ul>
                         <li><?= vestride_header_link('Home', '#main', 'home', $page) ?></li>
-                        <?
-                        $theme_options = vestride_get_theme_options();
-                        if ($theme_options['featured'] === 'yes') {
-                            echo '<li>' . vestride_header_link('Featured', '#featured', 'featured', $page) . '</li>';
-                        }
-                        ?>
                         <li><?= vestride_header_link('About Us', '#about', 'about', $page); ?></li>
                         <li><?= vestride_header_link('Work', '#work', 'work', $page); ?></li>
                         <li><?= vestride_header_link('Contact', '#contact', 'contact', $page); ?></li>

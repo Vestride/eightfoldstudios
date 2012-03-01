@@ -216,9 +216,12 @@ var Vestride = {
         fullHeight : null,
         minHeight : null,
         availableToScroll : null,
-        friction : 0.5,
+        friction : 0.3,
         $backdrop : null,
         $city : null,
+        $cityCompact : null,
+        $sunburst : null,
+        $navLogo : null,
         centered : 0,
         left : -180
     },
@@ -226,6 +229,9 @@ var Vestride = {
     initBackdrop : function() {
         this.backdrop.$backdrop = $('.backdrop');
         this.backdrop.$city = this.backdrop.$backdrop.find('.city');
+        this.backdrop.$cityCompact = this.backdrop.$backdrop.find('.city-compact');
+        this.backdrop.$sunburst = this.backdrop.$backdrop.find('.sunburst');
+        this.backdrop.$navLogo = $('nav .logo');
         this.backdrop.fullHeight = this.backdrop.$backdrop.height();
         this.backdrop.minHeight = this.backdrop.$city.height() + 10;
         this.backdrop.availableToScroll = this.backdrop.fullHeight - this.backdrop.minHeight;
@@ -237,14 +243,32 @@ var Vestride = {
             amountScrolledWithFriction,
             leftToScroll,
             percentScrolled,
-            backdropX;
+            backdropX,
+            compactOpacity;
             
         
-        if (newHeight < this.backdrop.minHeight) newHeight = this.backdrop.minHeight;
+        if (newHeight < this.backdrop.minHeight) {
+            newHeight = this.backdrop.minHeight;
+            this.backdrop.$backdrop.addClass('minimized');
+            this.backdrop.$navLogo.addClass('visible');
+        } else {
+            this.backdrop.$backdrop.removeClass('minimized');
+            this.backdrop.$navLogo.removeClass('visible');
+        }
         
         leftToScroll = newHeight - this.backdrop.minHeight;
         amountScrolledWithFriction = this.backdrop.availableToScroll - leftToScroll;
-        percentScrolled = amountScrolledWithFriction / this.backdrop.availableToScroll;
+        percentScrolled = compactOpacity = amountScrolledWithFriction / this.backdrop.availableToScroll;
+        
+        // Constrain the opacity of the compact city to .3 opacity;
+        if (compactOpacity > 0.7) compactOpacity = 0.7;
+        this.backdrop.$cityCompact.css('opacity', 1 - compactOpacity);
+        this.backdrop.$city.css('opacity', percentScrolled);
+        
+        // Don't do unnecessary operations
+        if (percentScrolled == 1) {
+            return;
+        }
         backdropX = this.backdrop.centered + Math.round(percentScrolled * this.backdrop.left);
         
         if (backdropX < this.backdrop.left) newHeight = this.backdrop.left;
@@ -253,7 +277,7 @@ var Vestride = {
         this.backdrop.$backdrop.children().first().css('bottom', scrolled);
         
         // Move the city over
-        this.backdrop.$city.css('background-position', backdropX + 'px 0');
+        this.backdrop.$sunburst.css('background-position', backdropX + 'px 0');
         
         // Move Backdrop at half speed
         this.backdrop.$backdrop.css('height', newHeight);
@@ -352,7 +376,7 @@ var Vestride = {
     },
 
     initLocalScroll : function() {
-        $('#nav, .quick-tiles').localScroll({
+        $('#nav, .quick-links').localScroll({
             hash:true,
             duration:300
         });

@@ -7,6 +7,9 @@
  * @since Vestride 1.0
  */
 
+// The requested URL /wordpress/index.php was not found on this server.
+// Project got featured without the checkbox
+
 $args = array(
     'post_type' => 'attachment',
     'numberposts' => -1,
