@@ -16,7 +16,7 @@
         <div class="contact">
             <div class="contact-form">
                 <h2>Message Us</h2>
-                <p class="greeting">Have a comment or question? Just want to say hello? We would love to hear from you!</p>
+                <p class="greeting">Have a <strong>comment</strong> or <strong>question</strong>? Just want to <strong>say hello</strong>? We&rsquo;d love to hear from you!</p>
                 <form>
                     <div class="notification error-notification" style="display: none;"></div>
                     <input type="hidden" name="name" value="" />

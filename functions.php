@@ -488,7 +488,7 @@ function add_person_meta() {
         </p>
         
         <h2>Social Links</h2>
-        <em>Only four (4) of these will be visible! If you don&#39;t want one, leave it blank!</em>
+        <em>Only four (4) of these will be visible! If you don&rsquo;t want one, leave it blank!</em>
         <p>
             <label for="facebook_meta"><strong>Facebook:</strong></label>
             <br />
@@ -561,7 +561,9 @@ add_action('save_post', 'save_details');
  * @param bool $onlyFeatured only retrieve projects that are 'featured'. Default = false.
  */
 function vestride_get_project_posts($posts_per_page = null, $img_size = 'work-thumb', $onlyFeatured = false) {
-    
+    if (is_null($posts_per_page)) {
+        $posts_per_page = -1;
+    }
     $args = array(
         'post_type' => 'project',
         'numberposts' => $posts_per_page
@@ -569,6 +571,7 @@ function vestride_get_project_posts($posts_per_page = null, $img_size = 'work-th
     
     if ($onlyFeatured) {
         $args['meta_key'] = 'featured';
+        //$args['meta_value'] = 'featured';
     }
     
     $projects = get_posts($args);
@@ -600,7 +603,8 @@ function vestride_get_featured_project_posts() {
 function vestride_get_people($onlyFeatured = false) {
     
     $args = array(
-        'post_type' => 'person'
+        'post_type' => 'person',
+        'numberposts' => -1
     );
     
     if ($onlyFeatured) {
@@ -627,6 +631,8 @@ function vestride_get_people($onlyFeatured = false) {
             'linkedin' => $custom['linkedin'][0],
             'googleplus' => $custom['googleplus'][0]
         );
+        
+        $person->img = get_the_post_thumbnail($person->ID, 'work-promo');
     }
     unset($person);
     $order = array();
@@ -691,7 +697,7 @@ function vestride_end() {
 }
 
 add_image_size('work-promo', 480, 9999);
-add_image_size('work-thumb', 9999, 145);
+add_image_size('work-thumb', 9999, 221);
 add_image_size('featured', 980, 9999);
 
 /**

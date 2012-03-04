@@ -46,7 +46,7 @@ $people = vestride_get_featured_people();
                     <article><?= $person->post_content; ?></article>
                 </div>
                 <div class="section-overview">
-                    <img class="hero" src="jake here" width="213" height="301" />
+                    <div class="hero hero-person"><?php echo $person->img; ?></div>
                     <ul class="follow-us follow-us-small">
                         <?php 
                             $count = 0;

@@ -16,6 +16,7 @@
         
         init : function(options) {
             var settings = {
+                'item' : '.item',
                 'itemWidth' : 230,
                 'margins' : 20,
                 'key' : 'all',
@@ -30,7 +31,7 @@
             
             return this.each(function() {
                 var $this = $(this),
-                    $items = $this.children(),
+                    $items = $this.children(settings.item),
                     itemsPerRow = Math.floor($this.width() / settings.itemWidth),
                     numRows = 2,
                     itemHeight = $items.first().outerHeight(),
@@ -141,7 +142,13 @@
         },
 
         filter : function() {
-            $(this).find('.filtered').each(function(index) {
+            var $filtered = $(this).find('.filtered')
+              , pages = Math.floor(($filtered.length - 1) / (data.itemsPerRow * data.numRows));
+            
+            console.log($(this));
+            $(this).attr('data-pages', pages + 1);
+            
+            $filtered.each(function(index) {
                 var $this = $(this),
                     data = $this.parent().data(paginate),
                     row = Math.floor(index / data.itemsPerRow),
@@ -205,7 +212,7 @@
                     opacity: opts.opacity,
                     height: opts.height,
                     width: opts.width
-                }, 800);
+                }, 400);
             }
         },
         
@@ -343,6 +350,7 @@
         /**
          * Puts the 'can-nav' class on the prev or next buttons where appropriate.
          * Puts the 'active' class on the correct control element
+         * Shows the current page youre on and the total pages
          * 
          * @param {int} toIndex The zero based index of the page navigated to.
          */

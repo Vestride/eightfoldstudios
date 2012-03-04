@@ -7,7 +7,6 @@
  * @since Vestride 1.0
  */
 
-// The requested URL /wordpress/index.php was not found on this server.
 // Project got featured without the checkbox
 
 $args = array(
@@ -23,11 +22,11 @@ $hero_id = $attachments[1] == null ? $attachments[0]->ID : $attachments[1]->ID;
 $hero = wp_get_attachment_image($hero_id, 'work-promo');
 $hero_full = wp_get_attachment_image_src($hero_id, 'full');
 
-if (!vestride_is_ajax()) {
-    get_header();
-    vestride_header('work');
-    get_template_part('backdrop', 'small');
-    ?>
+
+get_header();
+vestride_header('work');
+get_template_part('backdrop', 'small');
+?>
 <div id="main">
     <section class="project">
         <h3 class="section-title text-right"><span><?= $post->post_title; ?></span></h3>
@@ -79,53 +78,13 @@ if (!vestride_is_ajax()) {
         </section>
     </section>
 </div>
-    <?
-    get_footer();
-    ?>
-    <script>
-    $(document).ready(function() {
-        Vestride.onHomePage = false;
-    });
-    </script>
-    <?
-    vestride_end();
-} else {
-    // Page requested via ajax
-    
-    ?>
-    
-    <span class="blockbox-status rfloat"></span>
-    <h2 class="short"><?= $post->post_title; ?></h2>
-
-    <!--<span><?= get_the_categories(', '); ?></span>-->
-
-    <div class="project-preview clearfix">
-        <section class="project-sidebar project-specs lfloat">
-            <div class=" lfloat"></div>
-            <div class=" lfloat"></div>
-            <div class=" lfloat"></div>
-            <div class=" lfloat"></div>
-            <div class="blockbox-nav nav-prev lfloat"></div>
-            <div class="blockbox-nav nav-next lfloat"></div>
-        </section>
-
-        <section class="project-details lfloat">
-            <div class="project-img"><? echo $hero; ?></div>
-            <div class="project-desc">
-                <h3>Overview</h3>
-                <? echo $post->post_excerpt; ?>
-            </div>
-        </section>
-
-        <section class="project-sidebar project-what lfloat">
-            <div class=" lfloat"></div>
-            <div class=" lfloat"></div>
-            <div class=" lfloat"></div>
-            <div class=" lfloat"></div>
-            <a class="project-details-link lfloat" href="<? the_permalink() ?>" data-title="Project details"></a>
-            <div class="blockbox-close lfloat" title="Close"></div>
-        </section>
-    </div>
-    
-    <?
-}
+<?
+get_footer();
+?>
+<script>
+$(document).ready(function() {
+    Vestride.onHomePage = false;
+});
+</script>
+<?
+vestride_end();

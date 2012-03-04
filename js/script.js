@@ -265,10 +265,6 @@ var Vestride = {
         this.backdrop.$cityCompact.css('opacity', 1 - compactOpacity);
         this.backdrop.$city.css('opacity', percentScrolled);
         
-        // Don't do unnecessary operations
-        if (percentScrolled == 1) {
-            return;
-        }
         backdropX = this.backdrop.centered + Math.round(percentScrolled * this.backdrop.left);
         
         if (backdropX < this.backdrop.left) newHeight = this.backdrop.left;
