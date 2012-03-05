@@ -13,9 +13,10 @@ $featured_projects = vestride_get_featured_project_posts();
                     </li>
                     <? endforeach; ?>
                 </ul>
+                <div class="carousel-next sprite sprite-next"></div>
+                <div class="carousel-prev sprite sprite-prev"></div>
                 <span class="carousel-item-title"></span>
                 <div class="carousel-control-container">
-                    <div class="carousel-links"></div>
                     <div class="carousel-control"></div>
                 </div>
             </div>
@@ -34,12 +35,12 @@ $featured_projects = vestride_get_featured_project_posts();
                 <div>
                     <h4><span class="sprite sprite-message"></span>Our <strong>Blog</strong></h4>
                     <p>Want to know what we&rsquo;re up to? Keep up with our latest projects and interests.</p>
-                    <p><a href="#blog">Visit our blog<span class="sprite sprite-arrow-right"></span></a></p>
+                    <p><a href="<?php bloginfo('url'); ?>/blog">Visit our blog<span class="sprite sprite-arrow-right"></span></a></p>
                 </div>
                 <div>
                     <h4><span class="sprite sprite-download"></span>Free <strong>Downloads</strong></h4>
                     <p>Like free stuff? Of course you do. Download wallpapers, icons, and more!</p>
-                    <p><a href="#">Get free stuff!<span class="sprite sprite-arrow-right"></span></a></p>
+                    <p><a href="<?php bloginfo('url'); ?>/downloads">Get free stuff!<span class="sprite sprite-arrow-right"></span></a></p>
                 </div>
             </nav>
         </section>

@@ -571,7 +571,7 @@ function vestride_get_project_posts($posts_per_page = null, $img_size = 'work-th
     
     if ($onlyFeatured) {
         $args['meta_key'] = 'featured';
-        //$args['meta_value'] = 'featured';
+        $args['meta_value'] = 'featured';
     }
     
     $projects = get_posts($args);
@@ -670,7 +670,7 @@ function vestride_header($page = 'home') {
                         <li><?= vestride_header_link('About Us', '#about', 'about', $page); ?></li>
                         <li><?= vestride_header_link('Work', '#work', 'work', $page); ?></li>
                         <li><?= vestride_header_link('Contact', '#contact', 'contact', $page); ?></li>
-                        <li><?= vestride_header_link('Blog', '#blog', 'blog', $page); ?></li>
+                        <!--<li><?= vestride_header_link('Blog', '#blog', 'blog', $page); ?></li>-->
                     </ul>
                 </nav>
             </header>

@@ -1,5 +1,5 @@
 <?
-$project_categories = get_categories(array('type' => 'project', 'exclude' => '1', 'hide_empty' => 0));
+$project_categories = get_categories(array('type' => 'project', 'exclude' => '1', 'hide_empty' => 1));
 
 $projects = vestride_get_project_posts();
 ?>

@@ -25,7 +25,7 @@ get_template_part('backdrop');
             get_template_part('section', 'aboutus');
             get_template_part('section', 'work');
             get_template_part('section', 'contact');
-            get_template_part('section', 'blog');
+            //get_template_part('section', 'blog');
         ?>
     </div>
 </div>

@@ -411,6 +411,10 @@ nav .logo .main-color {
     background-position: -176px 0;
 }
 
+.backdrop-small + #main {
+    margin-top: 100px;
+}
+
 .tagline {
     position: relative;
     margin: 20px auto 0;
@@ -513,6 +517,10 @@ nav .logo .main-color {
     background-position: -606px 0;
 }
 
+.icon-download {
+    background-position: -682px -314px;
+}
+
 /*=============================================*\
  $About
 \*=============================================*/
@@ -585,7 +593,7 @@ nav .logo .main-color {
 .carousel > * { display: none; }
 
 .carousel {
-    height: 360px;
+    height: 305px;
     position: relative;
     z-index: 1;
     overflow:hidden;
@@ -600,13 +608,32 @@ nav .logo .main-color {
     overflow:hidden;
 }
 
+.carousel-next {
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    right: 10px;
+    margin-top: -20px;
+    cursor: pointer;
+}
+
+.carousel-prev {
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    left: 10px;
+    margin-top: -20px;
+    cursor: pointer;
+}
+
 .carousel-item-title {
     position: absolute;
     z-index: 3;
-    bottom: 13px;
-    right: 50px;
+    bottom: 5px;
+    right: 20px;
     color: #F0F0F0;
     font-size: 25px;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .75);
 }
 
 .carousel-control-container {
@@ -615,27 +642,23 @@ nav .logo .main-color {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 55px;
-    background-color: rgb(45, 45, 45); /* browsers that don't support rgba */
-    background-color: rgba(45, 45, 45, .9);
 }
 
 .carousel-control {
-    margin: 15px 0 15px 15px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-.carousel-control a,
-.carousel-control span {
-    background-color: #0F0F0F;
-    border: 1px solid #0AAAC8;
-    margin: 0 12px;
+.carousel-control > * {
+    background-color: #2D2D2D;
+    margin: 0 10px 0 0;
     text-decoration: none;
-    box-shadow: 0 1px 3px #000;
-
-    width: 25px;
-    height: 25px;
+    border-radius: 50%;
+    width: 19px;
+    height: 19px;
     display: inline-block;
     text-indent: -9999px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.75);
 
      -moz-transition: all 0.4s ease-out;
        -o-transition: all 0.4s ease-out;
@@ -644,16 +667,19 @@ nav .logo .main-color {
           transition: all 0.4s ease-out;
 }
 
-.carousel-control a:hover,
-.carousel-control span:hover,
+.carousel-control > *:last-child {
+    margin-right: 0;
+}
+
+.carousel-control > *:hover,
 .carousel-control .activeSlide {
     background-color: #0AAAC8;
 
-    -moz-transform: scale(1.4);
-    -webkit-transform: scale(1.4);
-    -o-transform: scale(1.4);
-    -ms-transform: scale(1.4);
-    transform: scale(1.4);
+    -moz-transform: scale(1.3);
+    -webkit-transform: scale(1.3);
+    -o-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
 }
 
 .quick-links {
@@ -824,10 +850,7 @@ nav .logo .main-color {
     float: left;
     outline: none;
     cursor: pointer;
-
-    -moz-box-shadow: 0 2px 3px #000 inset;
-    -webkit-box-shadow: 0 2px 3px #000 inset;
-    box-shadow: 0 2px 3px #000 inset;
+    background-color: #2D2D2D;
     
      -moz-transition: background-color 0.4s ease-out;
        -o-transition: background-color 0.4s ease-out;
@@ -902,12 +925,19 @@ nav .logo .main-color {
     opacity: 1;
 }
 
-#grid .item-type {
+#grid .item-title:hover {
+    color: #0AAAC8;
+    text-decoration: underline;
     
+     -moz-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+      -ms-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
 }
 
 #grid .item-post-excerpt {
-    
+    color: #9B9B9B;
 }
 
 /*=============================================*\
@@ -1623,8 +1653,8 @@ textarea + .sticky-placeholder.has-text  {
 }
 
 .sprite-prev {
-    width: 39px;
-    height: 39px;
+    width: 40px;
+    height: 40px;
     background-position: -650px 0;
 }
 
@@ -1633,8 +1663,8 @@ textarea + .sticky-placeholder.has-text  {
 }
 
 .sprite-next {
-    width: 39px;
-    height: 39px;
+    width: 40px;
+    height: 40px;
     background-position: -694px 0;
 }
 
@@ -1665,7 +1695,6 @@ textarea + .sticky-placeholder.has-text  {
     height: 40px;
     background-position: -606px -44px;
 }
-
 
 .sprite-3d {
     display: block;
@@ -1772,7 +1801,7 @@ textarea + .sticky-placeholder.has-text  {
 .sprite-recent:hover,
 .active .sprite-recent,
 .filter-option:hover .sprite-recent {
-    background-position: -530px -332px;
+    background-position: -535px -338px;
 }
 
 .sprite-recent-small {

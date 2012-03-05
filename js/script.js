@@ -303,6 +303,8 @@ var Vestride = {
             speed:  400,
             pause: 1,
             pager: selector + '-control',
+            next: '.carousel-next',
+            prev: '.carousel-prev',
             pagerAnchorBuilder : function(index, el) {
                 Vestride[anchorBuilder](this, index, el);
             },
