@@ -303,72 +303,166 @@ function create_person_post_type() {
         'name' => __('People'),
         'singular_name' => __('Person'),
         'menu_name' => __('People'),
-        'add_new' => __( 'Add New' ),
-        'add_new_item' => __( 'Add New Person' ),
-        'edit' => __( 'Edit' ),
-        'edit_item' => __( 'Edit Person' ),
-        'new_item' => __( 'New Person' ),
-        'view' => __( 'View' ),
-        'view_item' => __( 'View Person' ),
-        'search_items' => __( 'Search People' ),
-        'not_found' => __( 'No people found' ),
-        'not_found_in_trash' => __( 'No people found in Trash' ),
-        'parent' => __( 'Parent Person' )
+        'add_new' => __('Add New'),
+        'add_new_item' => __('Add New Person'),
+        'edit' => __('Edit'),
+        'edit_item' => __('Edit Person'),
+        'new_item' => __('New Person'),
+        'view' => __('View'),
+        'view_item' => __('View Person'),
+        'search_items' => __('Search People'),
+        'not_found' => __('No people found'),
+        'not_found_in_trash' => __('No people found in Trash'),
+        'parent' => __('Parent Person')
     );
     $args = array(
         'labels' => $labels,
         'public' => true,
         'publicly_queryable' => true,
-        'show_ui' => true, 
-        'show_in_menu' => true, 
+        'show_ui' => true,
+        'show_in_menu' => true,
         'query_var' => true,
         'rewrite' => true,
         'capability_type' => 'post',
-        'has_archive' => false, 
+        'has_archive' => false,
         'hierarchical' => false,
-        'menu_position' => 4,
-        'supports' => array('title','editor','thumbnail','excerpt'),
+        'menu_position' => 7,
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
         'taxonomies' => array()
-    ); 
-    register_post_type('person',$args);
+    );
+    register_post_type('person', $args);
 }
-add_action( 'init', 'create_person_post_type' );
 
 function create_project_post_type() {
     $labels = array(
         'name' => __('Projects'),
         'singular_name' => __('Project'),
         'menu_name' => __('Projects'),
-        'add_new' => __( 'Add New' ),
-        'add_new_item' => __( 'Add New Project' ),
-        'edit' => __( 'Edit' ),
-        'edit_item' => __( 'Edit Project' ),
-        'new_item' => __( 'New Project' ),
-        'view' => __( 'View Project' ),
-        'view_item' => __( 'View Project' ),
-        'search_items' => __( 'Search Projects' ),
-        'not_found' => __( 'No projects found' ),
-        'not_found_in_trash' => __( 'No projects found in Trash' ),
-        'parent' => __( 'Parent Project' )
+        'add_new' => __('Add New'),
+        'add_new_item' => __('Add New Project'),
+        'edit' => __('Edit'),
+        'edit_item' => __('Edit Project'),
+        'new_item' => __('New Project'),
+        'view' => __('View Project'),
+        'view_item' => __('View Project'),
+        'search_items' => __('Search Projects'),
+        'not_found' => __('No projects found'),
+        'not_found_in_trash' => __('No projects found in Trash'),
+        'parent' => __('Parent Project')
     );
     $args = array(
         'labels' => $labels,
         'public' => true,
         'publicly_queryable' => true,
-        'show_ui' => true, 
-        'show_in_menu' => true, 
+        'show_ui' => true,
+        'show_in_menu' => true,
         'query_var' => true,
         'rewrite' => true,
         'capability_type' => 'post',
-        'has_archive' => true, 
+        'has_archive' => true,
         'hierarchical' => false,
-        'menu_position' => 2,
-        'supports' => array('title','editor','thumbnail','excerpt'),
-        'taxonomies' => array('category', 'post_tag')
-    ); 
-    register_post_type('project',$args);
+        'menu_position' => 6,
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'taxonomies' => array('type')
+    );
+    register_post_type('project', $args);
 }
-add_action( 'init', 'create_project_post_type' );
+add_action('init', 'create_project_post_type');
+add_action('init', 'create_person_post_type');
+
+function vestride_icons() {
+                ?>
+        <style type="text/css" media="screen">
+            #menu-posts-project .wp-menu-image {
+                background: url('<?php bloginfo('template_url'); ?>/img/television.png') no-repeat 6px -17px !important;
+                opacity: 0.6;
+            }
+            #menu-posts-project:hover .wp-menu-image,
+            #menu-posts-project.wp-has-current-submenu .wp-menu-image {
+                background-position: 6px 7px !important;
+                opacity: 1.0;
+            }
+            
+            #menu-posts-person .wp-menu-image {
+                background: url('<?php bloginfo('template_url'); ?>/img/user-business.png') no-repeat 6px -17px !important;
+                opacity: 0.6;
+            }
+            #menu-posts-person:hover .wp-menu-image,
+            #menu-posts-person.wp-has-current-submenu .wp-menu-image {
+                background-position: 6px 7px !important;
+                opacity: 1.0;
+            }
+        </style>
+<?php
+}
+add_action('admin_head', 'vestride_icons');
+
+function create_project_taxonomies() {
+    
+    // Type taxonomy
+    $labels = array(
+        'name' => _x('Types', 'taxonomy general name'),
+        'singular_name' => _x('Type', 'taxonomy singular name'),
+        'search_items' => __('Search Types'),
+        'all_items' => __('All Type'),
+        'edit_item' => __('Edit Type'),
+        'update_item' => __('Update Type'),
+        'add_new_item' => __('Add New Type'),
+        'new_item_name' => __('New Type Name'),
+        'menu_name' => __('Type'),
+    );
+
+    register_taxonomy('type', array('project'), array(
+        'hierarchical' => true,
+        'labels' => $labels,
+        'show_ui' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'type'),
+    ));
+}
+add_action('init', 'create_project_taxonomies', 0);
+
+function add_project_columns($columns) {
+    return array(
+        'cb' => '<input type="checkbox" />',
+        'title' => __('Title'),
+        'featured' => __('Featured'),
+        'types' => __('Types'),
+        'date' => __('Date')
+    );
+}
+add_filter('manage_project_posts_columns' , 'add_project_columns');
+
+function add_person_columns($columns) {
+    return array(
+        'cb' => '<input type="checkbox" />',
+        'title' => __('Title'),
+        'featured' => __('Featured'),
+        'position' => __('Position'),
+        'date' => __('Date')
+    );
+}
+add_filter('manage_person_posts_columns' , 'add_person_columns');
+
+add_action('manage_posts_custom_column', 'custom_columns', 10, 2);
+function custom_columns($column, $post_id) {
+    switch ($column) {
+        case 'types':
+            $terms = get_the_term_list($post_id, 'type', '', ', ', '');
+            if (is_string($terms)) {
+                echo $terms;
+            } else {
+                echo 'Unable to get work type(s)';
+            }
+            break;
+        case 'featured':
+            echo get_post_meta($post_id, 'featured', true) == 'featured' ? 'Yes' : 'No';
+            break;
+        case 'position':
+            echo get_post_meta($post_id, 'position', true);
+            break;
+    }
+}
 
 function project_init() {
     add_meta_box("year_completed_meta", "Year Completed", "year_completed", "project", "side", "low");
@@ -578,17 +672,16 @@ function vestride_get_project_posts($posts_per_page = null, $img_size = 'work-th
     
     
     foreach ($projects as &$project) {
-        $p_categories = get_the_category($project->ID);
-        $category_names = array();
-        $category_slugs = array();
-        foreach ($p_categories as $cat) {
-            $category_names[] = $cat->name;
-            $category_slugs[] = $cat->slug;
+        $terms = get_the_terms($project->ID, 'type');
+        $term_names = array();
+        $term_slugs = array();
+        foreach ($terms as $term) {
+            $term_names[] = $term->name;
+            $term_slugs[] = $term->slug;
         }
 
-        //$project->categories = implode(', ', $category_names);
-        $project->categories = $category_names;
-        $project->category_slugs = $category_slugs;
+        $project->terms = $term_names;
+        $project->term_slugs = $term_slugs;
         $project->img = get_the_post_thumbnail($project->ID, $img_size);
         $project->permalink = get_permalink($project->ID);
     }

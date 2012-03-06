@@ -7,7 +7,7 @@ $featured_projects = vestride_get_featured_project_posts();
                 <ul class="carousel">
                     <? foreach ($featured_projects as $project) : ?>
                     <li>
-                        <a href="<? echo $project->permalink; ?>"  data-title="<? echo $project->post_title; ?>" data-categories='<? echo json_encode($project->categories); ?>'>
+                        <a href="<? echo $project->permalink; ?>"  data-title="<? echo $project->post_title; ?>" data-categories='<? echo json_encode($project->terms); ?>'>
                             <? echo $project->img; ?>
                         </a>
                     </li>
