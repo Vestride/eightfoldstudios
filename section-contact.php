@@ -44,13 +44,13 @@
                             <textarea data-placeholder="Message*" name="message" tabindex="5" required class="input-dark" id="f-textarea"></textarea>
                         </div>
                     </div>
+                    <p class="main-color">
+                        <em>* Required fields</em>
+                    </p>
                     <div class="send-wrapper">
                         <div class="send ir" id="contact-submit" tabindex="6">Send!</div>
                     </div>
                 </form>
-                <p class="main-color">
-                    <em>* Required fields</em>
-                </p>
             </div>
             <div class="follow-us">
                 <h2 class="short">Follow Us</h2>

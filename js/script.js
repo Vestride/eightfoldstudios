@@ -278,13 +278,26 @@ var Vestride = {
         // Move Backdrop at half speed
         this.backdrop.$backdrop.css('height', newHeight);
     },
+    
+    titles : {
+        'home' : 'Home',
+        'about' : 'About Us',
+        'work' : 'Work',
+        'contact' : 'Contact'
+    },
 
     scrolledIt : function() {
+        var title = 'Eightfold Studios'
         // Highlight which section we're in
-        $('#main section').each(function() {
-            var navId = '#a-' + $(this).attr('id');
-            if ($.inviewport($(this), {threshold : 0})) {
+        $('#sections > section').each(function() {
+            var $this = $(this)
+              , id = $this.attr('id')
+              , navId = '#a-' + id
+              , label = title + ' | ' + Vestride.titles[id];
+              
+            if ($.inviewport($this, {threshold : 0})) {
                 $(navId).addClass('in');
+                $('title').text(label);
             } else {
                 $(navId).removeClass('in');
             }
@@ -331,25 +344,6 @@ var Vestride = {
 
     cycleNoLinks : function(self, index, el) {
         $(self.pager).append('<span>' + (index + 1) + '</span>');
-    },
-
-    initGridHover : function() {
-        $('#grid .item').hover(
-            function() {
-                var $paneText = $(this).find('.pane-title, .pane-view');
-                $paneText.animate({
-                    left : '20px'
-                }, 250);
-            },
-            function() {
-                var $paneText = $(this).find('.pane-title, .pane-view');
-                $paneText.animate({
-                    left : '250px'
-                }, 150, function() {
-                    $paneText.css('left', '-230px');
-                });
-            }
-        );
     },
 
     initWorkFiltering : function() {
@@ -569,56 +563,26 @@ var Vestride = {
         return true;
     },
     
-    safeLoadImages : function(parent) {
-        var $imgs = $(parent).find('img'),
-            numImgs = $imgs.length,
-            numLoaded = 0;
-        
-        $imgs.load(function(e) {
-            numLoaded++;
-            if (numLoaded === numImgs) {
-                $(window).trigger('imgsLoaded.Vestride');
-            }
-        });
-    },
-    
-    fullscreenImage : function() {
-        $('.project .project-desc').click(function() {
-            // put in container div with overflow hidden?
-            var $mask = $('<div></div>', {"class": "blockbox-mask", style : "cursor: pointer;"}),
-                $projectImg = $('.project-img'),
-                imgUrl = $projectImg.attr('data-full'),
-                imgWidth = $projectImg.attr('data-full-width'),
-                imgHeight = $projectImg.attr('data-full-height'),
-                isLandscape = imgWidth > imgHeight,
-                $img = $('<img>', {src : imgUrl, alt : 'Full view', title : 'click to close'}),
-                $div = $('<div></div>', {style : 'overflow:hidden;text-align:center;'});
-
-            // Make sure the image will fit in the window
-            if (isLandscape) {
-                if (imgWidth > $(window).width()) {
-                    $img.width($(window).width());
-                    $div.height($(window).height());
+    initScreenshots : function() {
+        var $tiles = $('.project-sidebar .tiles li > *')
+          , $container = $('.project-hero')
+          , $hero = $container.children().first();
+          
+        $tiles.on('click', function() {
+            var $tile = $(this)
+              , isVideo = $tile.hasClass('is-video')
+              , currentlyVideo = $container.hasClass('is-video')
+              , title = $tile.attr('title');
+            
+            $container.animate({opacity: 0}, 300, function() {
+                if (isVideo) {
+                    $container.html($tile.find('.embed').html());
                 }
-            } else {
-                if (imgHeight > $(window).height()) {
-                    $img.height($(window).height());
-                    $div.width($(window).width());
+                else {
+                    $container.html($('<img>', { 'src' : $tile.attr('data-promo'), alt : title, title: title}));
                 }
-            }
-
-            // Clicking anywhere will remove everything
-            $mask.click(function(){
-                $(this).remove();
+                $container.animate({opacity: 1}, 300);
             });
-
-            $div.append($img)
-            $mask.append($div);
-            $('body').append($mask);
         });
     }
 };
-
-$(document).ready(function(){
-    Vestride.fullscreenImage();
-});

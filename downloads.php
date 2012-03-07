@@ -11,7 +11,7 @@ get_header();
 vestride_header('downloads');
 get_template_part('backdrop', 'small');
 ?>
-<div id="main">    
+<div id="main" role="main">    
     <section id="blog">
         <h3 class="section-title text-right"><span>Downloads<span class="title-icon icon-download"></span></span></h3>
         
@@ -45,13 +45,10 @@ get_template_part('backdrop', 'small');
         <?php endif; ?>
     </section>
 </div>
-<?
-get_footer();
-?>
+<?php get_footer(); ?>
 <script>
 $(document).ready(function() {
     Vestride.onHomePage = false;
 });
 </script>
-<?
-vestride_end();
+<?php vestride_end(); ?>

@@ -11,19 +11,24 @@
  * @subpackage Twenty_Eleven
  * @since Twenty Eleven 1.0
  */
+get_header();
+vestride_header('');
+get_template_part('backdrop', 'small');
+?>
+<div id="main" role="main">
 
-get_header(); ?>
+    <?php the_post(); ?>
 
-		<div id="primary">
-			<div id="content" role="main">
+    <?php get_template_part('content', 'page'); ?>
 
-				<?php the_post(); ?>
+    <?php comments_template('', true); ?>
 
-				<?php get_template_part( 'content', 'page' ); ?>
-
-				<?php comments_template( '', true ); ?>
-
-			</div><!-- #content -->
-		</div><!-- #primary -->
+</div><!-- #main -->
 
 <?php get_footer(); ?>
+<script>
+    $(document).ready(function() {
+        Vestride.onHomePage = false;
+    });
+</script>
+<?php vestride_end(); ?>

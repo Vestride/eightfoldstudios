@@ -1,5 +1,4 @@
 <?
-//$project_categories = get_categories(array('type' => 'project', 'exclude' => '1', 'hide_empty' => 1));
 $project_categories = get_terms('type', array('number' => 5));
 
 $projects = vestride_get_project_posts();
@@ -27,7 +26,7 @@ $projects = vestride_get_project_posts();
                         <div class="item-details-container">
                             <div class="item-details">
                                 <a href="<? echo $project->permalink; ?>"><h4 class="item-title"><?= $project->post_title; ?></h4></a>
-                                <h5 class="item-type main-color"><?php echo implode(', ', $project->categories); ?></h5>
+                                <h5 class="item-type main-color"><?php echo implode(', ', $project->terms); ?></h5>
                                 <p class="item-post-excerpt"><?php echo $project->post_excerpt; ?></p>
                             </div>
                         </div>

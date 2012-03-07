@@ -224,7 +224,6 @@ h2.inverted::after {
 }
 
 h2.short {
-    width: 226px;
     min-width: 226px;
 }
 
@@ -365,11 +364,12 @@ nav .logo .main-color {
     height: 91px;
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    margin-left: -750px;
+    width: 1500px;
     background-image: url(img/city.png);
     background-repeat: repeat-x;
-    background-position: -180px 0;
+    background-position: -220px 0;
     opacity: 0;
     z-index: 3;
 }
@@ -403,7 +403,6 @@ nav .logo .main-color {
 }
 
 .backdrop-small .city {
-    background-position: -180px 0;
     opacity: 1;
 }
 
@@ -437,7 +436,7 @@ nav .logo .main-color {
 
 #main {
     width: 980px;
-    margin: 160px auto auto;
+    margin: 160px auto 20px;
     position: relative;
     z-index: 2;
 }
@@ -459,7 +458,11 @@ nav .logo .main-color {
 }
 
 #sections > section {
-    margin-bottom: 200px;
+    margin-bottom: 400px;
+}
+
+#sections > section:last-child {
+    margin-bottom: 20px;
 }
 
 /** Little hacky. The global nav is on top of the title **/
@@ -731,7 +734,7 @@ nav .logo .main-color {
 }
 
 .filter-options li {
-    display: inline-block;
+    float: left;
     position: relative;
     margin: 0 2px 2px 0;
     background-color: #2D2D2D;
@@ -1073,9 +1076,9 @@ textarea + .sticky-placeholder.has-text  {
     padding: 15px 0;
 }
 
-.contact-form p:last-of-type {
+.contact-form form p {
     float: left;
-    margin-left: 38px;
+    margin-left: 40px;
 }
 
 .contact-form .input-wrapper,
@@ -1087,6 +1090,10 @@ textarea + .sticky-placeholder.has-text  {
 
 .contact-form .input-wrapper {
     width: 300px;
+}
+
+.contact-form .send-wrapper {
+    height: 97px;
 }
 
 .contact-form .send {
@@ -1278,114 +1285,73 @@ textarea + .sticky-placeholder.has-text  {
 /*=============================================*\
  $Footer
 \*=============================================*/
-#container > footer {
+.footer-inside {
     width: 980px;
-    margin: 50px auto 0;
+    margin: auto;
     position: relative;
     z-index: 1;
-    border-top: 1px solid #2D2D2D;
+}
+
+.footer-inside .fb-like {
+    margin: auto;
+}
+
+.footer-header {
+    background-color: #2D2D2D;
+    padding: 50px 0;
+}
+
+footer .fb-like-box {
+    display: block;
+    margin: auto;
+    width: 292px;
 }
 
 /*=============================================*\
- $Preview
+ $Project
 \*=============================================*/
-
-/* height 350 */
-.project-preview > section {
-    margin-right: 20px;
+.project h2 {
+    margin-top: 0;
 }
 
-.project-preview > section:last-child {
-    margin-right: 0;
+.project-hero {
+    margin-top: 72px;
 }
 
-.project-sidebar {
+.tiles {
+    padding: 0;
+    margin: 0;
+    list-style: none;
     width: 230px;
 }
 
-.project-sidebar > * {
+.tiles li {
+    float: left;
+    position: relative;
+    margin: 0 2px 2px 0;
+    background-color: #2D2D2D;
+    color: #0F0F0F;
     width: 114px;
     height: 114px;
-    background: #2D2D2D;
-    margin-right: 2px;
-    margin-bottom: 2px;
+    overflow: hidden;
+
+  -webkit-transition: all 0.2s ease-out;
+     -moz-transition: all 0.2s ease-out;
+      -ms-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
 }
 
-.project-sidebar > *:nth-child(even) {
+.tiles li:nth-child(even) {
     margin-right: 0;
 }
 
-.project-details > * {
-    width: 480px;
-    background-color: #2D2D2D;
-}
-
-.project-img {
-    text-align: center;
-    margin-bottom: 2px;
-    height: 230px;
-    overflow: hidden;
-}
-
-.project-desc {
-    height: 114px;
-    padding: 20px;
-}
-
-.project-desc h3 {
-    margin: 0 0 2px 0;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.project-details-link {
-    position: relative;
-    text-align: center;
-}
-
-.project-details-link:hover {
+.tiles li:hover,
+.tiles li.active {
+    cursor: pointer;
     background-color: #0AAAC8;
-}
-
-.project-details-link:before {
-    content: attr(data-title);
-    position: absolute;
-    bottom: 25px;
-    left: 0px;
-    font-size: 25px;
-    color: #0F0F0F;
-}
-
-.project-details-link:hover:before {
     color: #F0F0F0;
-}
-
-.project .project-desc {
-    text-align: center;
-    font-size: 45px;
-    color: #0F0F0F;
-    cursor:pointer;
-}
-
-.project .project-desc:hover {
-    color: #F0F0F0;
-    background-color: #0AAAC8;
-}
-
-.project-info {
-    margin-top: 40px;
-}
-
-.project-overview {
-    margin-right: 20px;
-    width: 230px;
-}
-
-.project-content {
-    -webkit-column-count: 2;  -webkit-column-gap: 20px;
-     -moz-column-count: 2;     -moz-column-gap: 20px;
-          column-count: 2;          column-gap: 20px;
-
+    box-shadow: 0 0 20px #F0F0F0;
 }
 
 /*=============================================*\
@@ -1461,6 +1427,12 @@ textarea + .sticky-placeholder.has-text  {
 
 
 
+.error404 .entry-content > .widget,
+.not-found .entry-content > .widget {
+    float: left;
+    margin-right: 20px;
+}
+
 
 /* ==|== non-semantic helper classes ========================================
    Please define your styles before this section.
@@ -1486,7 +1458,7 @@ textarea + .sticky-placeholder.has-text  {
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
-
+.block { display: block; }
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }

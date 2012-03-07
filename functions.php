@@ -65,9 +65,6 @@ function vestride_setup() {
 	// Add support for a variety of post formats
 	add_theme_support( 'post-formats', array( 'aside', 'link', 'gallery', 'status', 'quote', 'image' ) );
 
-	// Add support for custom backgrounds
-	//add_custom_background();
-
 	// This theme uses Featured Images (also known as post thumbnails) for per-post/per-page Custom Header images
 	add_theme_support( 'post-thumbnails' );
 	
@@ -136,7 +133,7 @@ function vestride_content_nav( $nav_id ) {
 
     if ( $wp_query->max_num_pages > 1 ) : ?>
         <nav id="<?php echo $nav_id; ?>">
-            <h3 class="assistive-text"><?php _e( 'Post navigation', 'vestride' ); ?></h3>
+            <h3 class="ir"><?php _e( 'Post navigation', 'vestride' ); ?></h3>
             <div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'vestride' ) ); ?></div>
             <div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'vestride' ) ); ?></div>
         </nav><!-- #nav-above -->
@@ -485,13 +482,14 @@ function add_info_meta() {
     global $post;
     $custom = get_post_custom($post->ID);
     $featured = $custom["featured"][0];
-    $client = $custom["client"][0];
-    $programs = $custom["programs"][0];
+    $video = $custom["video"][0];
+    /*$programs = $custom["programs"][0];
     $programs = maybe_unserialize($programs);
     if (empty($programs)) {
         $programs = array();
     }
     $programs = array_flip($programs);
+    */
     ?>
         <p>
             <strong>Use in featured projects</strong>
@@ -503,10 +501,13 @@ function add_info_meta() {
             
         </p>
         <p>
-            <label for="client_meta"><strong>Built For:</strong></label>
+            <label for="video_meta"><strong>Video embed code:</strong></label>
             <br />
-            <input id="client_meta" name="client" value="<?php echo $client; ?>" />
+            <em>The video should be embedded with a width of 640 pixels.</em>
+            <br />
+            <textarea id="video_meta" name="video" style="width:400px;height:100px;"><?php echo $video; ?></textarea>
         </p>
+        <?php /*
         <p>
             <strong>Programs used:</strong>
             <br />
@@ -531,7 +532,7 @@ function add_info_meta() {
             </label>
             
         </p>
-    <?php
+        */
 }
 
 function add_person_meta() {
@@ -628,8 +629,8 @@ function save_details($post_id) {
         if ($post->post_type === 'project') {
             update_post_meta($post_id, "year_completed", $_POST["year_completed"]);
             update_post_meta($post_id, "featured", $_POST["featured"]);
-            update_post_meta($post_id, "client", $_POST["client"]);
-            update_post_meta($post_id, "programs", $_POST["programs"]);
+            update_post_meta($post_id, "video", esc_html($_POST["video"]));
+            //update_post_meta($post_id, "programs", $_POST["programs"]);
         } else if ($post->post_type === 'person') {
             update_post_meta($post_id, "fname", $_POST["fname"]);
             update_post_meta($post_id, "lname", $_POST["lname"]);
@@ -702,6 +703,7 @@ function vestride_get_people($onlyFeatured = false) {
     
     if ($onlyFeatured) {
         $args['meta_key'] = 'featured';
+        $args['meta_value'] = 'featured';
     }
     
     $people = get_posts($args);
@@ -789,7 +791,7 @@ function vestride_end() {
     </html><?
 }
 
-add_image_size('work-promo', 480, 9999);
+add_image_size('work-promo', 640, 9999);
 add_image_size('work-thumb', 9999, 221);
 add_image_size('featured', 980, 9999);
 

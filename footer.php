@@ -5,18 +5,23 @@
  * Contains the closing of the id=main div and all content after
  *
  * @package WordPress
- * @subpackage Twenty_Eleven
- * @since Twenty Eleven 1.0
+ * @subpackage Vestride
+ * @since Vestride 1.0
  */
 ?>
         <footer>
-            <p>
-                Eightfold<span class="main-color">Studios</span>
-                <br />
-                <small>&copy; <?= date('Y'); ?> Eightfold Studios. All rights reserved.</small>
-            </p>
+            <!-- <?php bloginfo('url'); ?> -->
+            <section class="footer-header">
+                <div class="footer-inside">
+                    <div class="fb-like-box" data-href="http://www.facebook.com/EightfoldStudios" data-border-color="#2D2D2D" data-width="292" data-colorscheme="dark" data-show-faces="true" data-stream="false" data-header="false"></div>
+                </div>
+            </section>
+            <section class="footer-inside text-center">
+                <p>Designed by <span class="main-color">Jake Likewise</span> | Coded by <a href="http://glencheney.com">Glen Cheney</a></p>
+                <p><small>&copy; <?= date('Y'); ?> Eightfold Studios. All rights reserved.</small></p>
+            </section>
         </footer>
-    </div> <!--! end of #container -->
+    </div> <!-- end of #container -->
 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
@@ -26,8 +31,7 @@
     <script defer src="<? echo get_template_directory_uri(); ?>/js/plugins.js"></script>
     <script defer src="<? echo get_template_directory_uri(); ?>/js/script.js"></script>
 
-
-    <!-- Change UA-XXXXX-X to be your site's ID -->
+    <div id="fb-root"></div>
     <script>
     /*window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
     Modernizr.load({
@@ -37,6 +41,14 @@
     $(document).ready(function(){
         Vestride.themeUrl = '<? echo get_template_directory_uri(); ?>';
     });
+    
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
     </script>
 
 
