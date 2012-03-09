@@ -17,7 +17,7 @@ get_template_part('backdrop', 'small');
         
         <?php $posts = new WP_Query(array('post_type' => 'post', 'posts_per_page' => -1, 'category_name' => 'download')); ?>
         <?php if ($posts->have_posts()) : ?>
-
+        <div class="has-posts">
             <?php vestride_content_nav('nav-above'); ?>
 
             <?php /* Start the Loop */ ?>
@@ -28,7 +28,7 @@ get_template_part('backdrop', 'small');
             <?php endwhile; ?>
 
             <?php vestride_content_nav('nav-below'); ?>
-
+        </div>
         <?php else : ?>
 
             <article id="post-0" class="post no-results not-found">

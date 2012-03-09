@@ -62,13 +62,6 @@ function vestride_theme_options_do_page() {
             
             <table class="form-table">
                 
-                <tr valign="top"><th scope="row"><?php _e('Use the featured section', 'vestride'); ?></th>
-                    <td>
-                        <input id="vestride_theme_options[featured]" name="vestride_theme_options[featured]" type="checkbox" value="1" <?php checked('yes', $options['featured']); ?> />
-                        <label class="description" for="vestride_theme_options[featured]"><?php _e('Featured', 'vestride'); ?></label>
-                    </td>
-                </tr>
-                
                 <tr valign="top"><th scope="row"><?php _e('Twitter Username', 'vestride'); ?></th>
                     <td>
                         <input id="vestride_theme_options[twitter]" name="vestride_theme_options[twitter]" type="text" value="<?php echo $options['twitter']; ?>" />
@@ -154,12 +147,23 @@ function vestride_theme_options_do_page() {
  */
 function vestride_theme_options_validate($input) {
     // Our checkbox value is either 0 or 1
-    if (!isset($input['featured']))
-        $input['featured'] = null;
-    $input['featured'] = ($input['featured'] == '1') ? 'yes' : 'no';
+//    if (!isset($input['featured']))
+//        $input['featured'] = null;
+//    $input['featured'] = ($input['featured'] == '1') ? 'yes' : 'no';
 
     // Say our text option must be safe text with no HTML tags
     $input['twitter'] = wp_filter_nohtml_kses($input['twitter']);
+    $input['facebook'] = wp_filter_nohtml_kses($input['facebook']);
+    $input['vimeo'] = wp_filter_nohtml_kses($input['vimeo']);
+    $input['youtube'] = wp_filter_nohtml_kses($input['youtube']);
+    $input['googleplus'] = wp_filter_nohtml_kses($input['googleplus']);
+    $input['dribbble'] = wp_filter_nohtml_kses($input['dribbble']);
+    $input['flickr'] = wp_filter_nohtml_kses($input['flickr']);
+    $input['github'] = wp_filter_nohtml_kses($input['github']);
+    $input['gamertag'] = wp_filter_nohtml_kses($input['gamertag']);
+    $input['linkedin'] = wp_filter_nohtml_kses($input['linkedin']);
+    
+    
     //  105688492908876684797
 
     // Our select option must actually be in our array of select options

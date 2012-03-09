@@ -140,6 +140,16 @@ function vestride_content_nav( $nav_id ) {
     <?php endif;
 }
 
+function vestride_nav_single() {
+    ?>
+    <nav id="nav-single" class="text-center">
+        <h3 class="ir"><?php _e('Post navigation', 'vestride'); ?></h3>
+        <span class="nav-previous"><?php previous_post_link('%link'); ?></span>
+        <span class="nav-next"><?php next_post_link('%link'); ?></span>
+    </nav><!-- #nav-single -->
+<?php
+}
+
 /**
  * Return the URL for the first link found in the post content.
  *
@@ -197,60 +207,60 @@ if ( ! function_exists( 'vestride_comment' ) ) :
  *
  * @since Twenty Eleven 1.0
  */
-function vestride_comment( $comment, $args, $depth ) {
-	$GLOBALS['comment'] = $comment;
-	switch ( $comment->comment_type ) :
-            case 'pingback' :
-            case 'trackback' :
-	?>
-	<li class="post pingback">
-            <p><?php _e( 'Pingback:', 'vestride' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'vestride' ), '<span class="edit-link">', '</span>' ); ?></p>
+function vestride_comment($comment, $args, $depth) {
+    $GLOBALS['comment'] = $comment;
+    switch ($comment->comment_type) :
+        case 'pingback' :
+        case 'trackback' :
+    ?>
+    <li class="post pingback">
+        <p><?php _e( 'Pingback:', 'vestride' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'vestride' ), '<span class="edit-link">', '</span>' ); ?></p>
+    <?php
+            break;
+        default :
+    ?>
+    <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+        <article id="comment-<?php comment_ID(); ?>" class="comment">
+            <div class="comment-meta">
+                <div class="comment-author vcard">
+                    <?php
+                        $avatar_size = 68;
+                        if ( '0' != $comment->comment_parent )
+                            $avatar_size = 39;
+
+                        echo get_avatar( $comment, $avatar_size );
+
+                        /* translators: 1: comment author, 2: date and time */
+                        printf( __( '%1$s on %2$s <span class="says">said:</span>', 'vestride' ),
+                                sprintf( '<span class="fn">%s</span>', get_comment_author_link() ),
+                                sprintf( '<a href="%1$s"><time pubdate datetime="%2$s">%3$s</time></a>',
+                                        esc_url( get_comment_link( $comment->comment_ID ) ),
+                                        get_comment_time( 'c' ),
+                                        /* translators: 1: date, 2: time */
+                                        sprintf( __( '%1$s at %2$s', 'vestride' ), get_comment_date(), get_comment_time() )
+                                )
+                        );
+                    ?>
+
+                    <?php edit_comment_link( __( 'Edit', 'vestride' ), '<span class="edit-link">', '</span>' ); ?>
+                </div><!-- .comment-author .vcard -->
+
+                <?php if ( $comment->comment_approved == '0' ) : ?>
+                    <em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'vestride' ); ?></em>
+                    <br />
+                <?php endif; ?>
+
+            </div>
+
+            <div class="comment-content"><?php comment_text(); ?></div>
+
+            <div class="reply">
+                <?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply <span>&darr;</span>', 'vestride' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+            </div><!-- .reply -->
+        </article><!-- #comment-## -->
+
 	<?php
-                    break;
-            default :
-	?>
-	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-            <article id="comment-<?php comment_ID(); ?>" class="comment">
-                <footer class="comment-meta">
-                    <div class="comment-author vcard">
-                        <?php
-                            $avatar_size = 68;
-                            if ( '0' != $comment->comment_parent )
-                                    $avatar_size = 39;
-
-                            echo get_avatar( $comment, $avatar_size );
-
-                            /* translators: 1: comment author, 2: date and time */
-                            printf( __( '%1$s on %2$s <span class="says">said:</span>', 'vestride' ),
-                                    sprintf( '<span class="fn">%s</span>', get_comment_author_link() ),
-                                    sprintf( '<a href="%1$s"><time pubdate datetime="%2$s">%3$s</time></a>',
-                                            esc_url( get_comment_link( $comment->comment_ID ) ),
-                                            get_comment_time( 'c' ),
-                                            /* translators: 1: date, 2: time */
-                                            sprintf( __( '%1$s at %2$s', 'vestride' ), get_comment_date(), get_comment_time() )
-                                    )
-                            );
-                        ?>
-
-                        <?php edit_comment_link( __( 'Edit', 'vestride' ), '<span class="edit-link">', '</span>' ); ?>
-                    </div><!-- .comment-author .vcard -->
-
-                    <?php if ( $comment->comment_approved == '0' ) : ?>
-                        <em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'vestride' ); ?></em>
-                        <br />
-                    <?php endif; ?>
-
-                </footer>
-
-                <div class="comment-content"><?php comment_text(); ?></div>
-
-                <div class="reply">
-                    <?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply <span>&darr;</span>', 'vestride' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-                </div><!-- .reply -->
-            </article><!-- #comment-## -->
-
-	<?php
-                    break;
+            break;
     endswitch;
 }
 endif; // ends check for vestride_comment()
@@ -263,7 +273,7 @@ if ( ! function_exists( 'vestride_posted_on' ) ) :
  * @since Twenty Eleven 1.0
  */
 function vestride_posted_on() {
-    printf( __( '<span class="sep">Posted on </span><a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', 'vestride' ),
+    printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', 'vestride' ),
         esc_url( get_permalink() ),
         esc_attr( get_the_time() ),
         esc_attr( get_the_date( 'c' ) ),
@@ -759,7 +769,7 @@ function vestride_header($page = 'home') {
     ?>
             <header>
                 <nav id="nav" role="navigation">
-                    <div class="logo"><img src="<?= get_template_directory_uri(); ?>/img/es.svg" alt="logo" width="28" /><strong>Eightfold</strong> <span class="main-color">Studios</span></div>
+                    <div class="logo"><a href="<?php bloginfo('url'); ?>"><img src="<?= get_template_directory_uri(); ?>/img/es.svg" alt="logo" width="28" /><strong>Eightfold</strong> <span class="main-color">Studios</span></a></div>
                     <ul>
                         <li><?= vestride_header_link('Home', '#main', 'home', $page) ?></li>
                         <li><?= vestride_header_link('About Us', '#about', 'about', $page); ?></li>

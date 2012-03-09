@@ -19,10 +19,6 @@
     </div><!-- .entry-content -->
     <footer class="entry-meta">
         <?php edit_post_link(__('Edit', 'vestride'), '<span class="edit-link">', '</span>'); ?>
-        <nav id="nav-single">
-            <h3 class="ir"><?php _e('Project navigation', 'vestride'); ?></h3>
-            <span class="nav-previous"><?php previous_post_link('%link', __('<span class="meta-nav">&larr;</span> Previous', 'vestride')); ?></span>
-            <span class="nav-next"><?php next_post_link('%link', __('Next <span class="meta-nav">&rarr;</span>', 'vestride')); ?></span>
-        </nav><!-- #nav-single -->
+        <?php vestride_nav_single(); ?>
     </footer><!-- .entry-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->

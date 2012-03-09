@@ -43,10 +43,6 @@
             <span class="comments-link"><?php comments_popup_link('<span class="leave-reply">' . __('Leave a reply', 'vestride') . '</span>', __('<b>1</b> Reply', 'vestride'), __('<b>%</b> Replies', 'vestride')); ?></span>
         <?php endif; ?>
         <?php edit_post_link(__('Edit', 'vestride'), '<span class="edit-link">', '</span>'); ?>
-        <nav id="nav-single">
-            <h3 class="ir"><?php _e('Post navigation', 'vestride'); ?></h3>
-            <span class="nav-previous"><?php previous_post_link('%link', __('<span class="meta-nav">&larr;</span> Previous', 'vestride')); ?></span>
-            <span class="nav-next"><?php next_post_link('%link', __('Next <span class="meta-nav">&rarr;</span>', 'vestride')); ?></span>
-        </nav><!-- #nav-single -->
+        <?php vestride_nav_single(); ?>
     </footer><!-- #entry-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->

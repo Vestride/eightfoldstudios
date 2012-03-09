@@ -41,19 +41,18 @@ $hero = $hasVideo ? $videoEmbed : get_the_post_thumbnail(get_the_ID(), 'work-pro
 
     <div class="entry-content">
         
-        <div class="clearfix">
-            <section class="project-hero rfloat"><? echo $hero; ?></section>
-            <section class="project-sidebar project-specs lfloat">
+        <section class="clearfix">
+            <div class="project-hero rfloat"><? echo $hero; ?></div>
+            <div class="project-sidebar project-specs lfloat">
                 <h2 class="short">Screenshots</h2>
                 <ul class="tiles">
                     <? if ($hasVideo) : ?>
-                    <li><div class="sprite sprite-play"></div><span>Video</span><div class="embed hidden"><?php echo $videoEmbed; ?></div></li>
+                    <li class="tile is-video active"><div class="sprite sprite-play"></div><span>Play Video</span><div class="embed hidden"><?php echo $videoEmbed; ?></div></li>
                     <? endif; ?>
                     <? for ($i = 0; $i < count($thumbnails); $i++) : ?>
-                    <li>
+                    <li class="tile" title="<?php echo $thumbnails[$i]['title']; ?>">
                         <img src="<?php echo $thumbnails[$i][0]; ?>"
                              alt="<?php echo $thumbnails[$i]['caption'] != '' ? $thumbnails[$i]['caption'] : $thumbnails[$i]['title'] ; ?>"
-                             title="<?php echo $thumbnails[$i]['title']; ?>"
                              data-promo="<?php echo $promos[$i][0]; ?>"
                              data-thumb="<?php echo $thumbnails[$i][0]; ?>"
                              height="114"
@@ -62,8 +61,17 @@ $hero = $hasVideo ? $videoEmbed : get_the_post_thumbnail(get_the_ID(), 'work-pro
                     </li>
                     <? endfor; ?>
                 </ul>
-            </section>
-        </div>
+            </div>
+        </section>
+        
+        <div class="divider"></div>
+        
+        <section>
+            <h2><?php the_title(); ?></h2>
+            <p><?php the_content(); ?></p>
+        </section>
+        
+        <!--
         <section class="section-info clearfix">
             <div class="section-details rfloat"><?php echo $post->post_excerpt; ?></div>
             <div class="section-overview">
@@ -78,6 +86,7 @@ $hero = $hasVideo ? $videoEmbed : get_the_post_thumbnail(get_the_ID(), 'work-pro
                 <span class="article-subtitle"><? the_title(); ?></span>
             </div>
         </section>
+        -->
     </div><!-- .entry-content -->
 
     <footer class="entry-meta">
@@ -94,11 +103,6 @@ $hero = $hasVideo ? $videoEmbed : get_the_post_thumbnail(get_the_ID(), 'work-pro
         ?>
         <?php edit_post_link(__('Edit', 'vestride'), '<span class="edit-link">', '</span>'); ?>
         
-        
-        <nav id="nav-single">
-            <h3 class="ir"><?php _e('Project navigation', 'vestride'); ?></h3>
-            <span class="nav-previous"><?php previous_post_link('%link', __('<span class="meta-nav">&larr;</span> Previous', 'vestride')); ?></span>
-            <span class="nav-next"><?php next_post_link('%link', __('Next <span class="meta-nav">&rarr;</span>', 'vestride')); ?></span>
-        </nav><!-- #nav-single -->
+        <?php vestride_nav_single(); ?>
     </footer><!-- .entry-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->

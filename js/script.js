@@ -564,25 +564,31 @@ var Vestride = {
     },
     
     initScreenshots : function() {
-        var $tiles = $('.project-sidebar .tiles li > *')
-          , $container = $('.project-hero')
-          , $hero = $container.children().first();
+        var $tiles = $('.project-sidebar .tiles li')
+          , $container = $('.project-hero');
           
         $tiles.on('click', function() {
             var $tile = $(this)
               , isVideo = $tile.hasClass('is-video')
-              , currentlyVideo = $container.hasClass('is-video')
               , title = $tile.attr('title');
             
+            $tiles.removeClass('active');
+            $tile.addClass('active');
             $container.animate({opacity: 0}, 300, function() {
                 if (isVideo) {
                     $container.html($tile.find('.embed').html());
                 }
                 else {
-                    $container.html($('<img>', { 'src' : $tile.attr('data-promo'), alt : title, title: title}));
+                    $container.html($('<img>', { 'src' : $tile.find('img').attr('data-promo'), alt : title, title: title}));
                 }
                 $container.animate({opacity: 1}, 300);
             });
         });
     }
 };
+
+$(document).ready(function() {
+    if (!Vestride.onHomePage) {
+        $('header .logo').addClass('visible');
+    }
+});

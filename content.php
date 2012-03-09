@@ -12,7 +12,7 @@
     <header class="entry-header">
         <?php if (is_sticky()) : ?>
             <hgroup>
-                <h1 class="entry-title section-title text-right"><a href="<?php the_permalink(); ?>" title="<?php printf(esc_attr__('Permalink to %s', 'vestride'), the_title_attribute('echo=0')); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+                <h1 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf(esc_attr__('Permalink to %s', 'vestride'), the_title_attribute('echo=0')); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
                 <h3 class="entry-format"><?php _e('Featured', 'vestride'); ?></h3>
             </hgroup>
         <?php else : ?>
@@ -24,12 +24,6 @@
                 <?php vestride_posted_on(); ?>
             </div><!-- .entry-meta -->
         <?php endif; ?>
-
-        <?php if (comments_open() && !post_password_required()) : ?>
-            <div class="comments-link">
-                <?php comments_popup_link('<span class="leave-reply">' . __('Reply', 'vestride') . '</span>', _x('1', 'comments number', 'vestride'), _x('%', 'comments number', 'vestride')); ?>
-            </div>
-        <?php endif; ?>
     </header><!-- .entry-header -->
 
     <?php if (is_search()) : // Only display Excerpts for Search ?>
@@ -38,7 +32,11 @@
         </div><!-- .entry-summary -->
     <?php else : ?>
         <div class="entry-content">
-            <?php the_content(__('Continue reading <span class="meta-nav">&rarr;</span>', 'vestride')); ?>
+            <?php if ($the_post_thumbnail = get_the_post_thumbnail(null, 'work-promo')) : ?>
+            <div class="entry-img"><?php echo $the_post_thumbnail; ?></div>
+            <?php endif; ?>
+            <?php the_excerpt(); ?>
+            <?php //the_content(__('Continue reading <span class="meta-nav">&rarr;</span>', 'vestride')); ?>
             <?php wp_link_pages(array('before' => '<div class="page-link"><span>' . __('Pages:', 'vestride') . '</span>', 'after' => '</div>')); ?>
         </div><!-- .entry-content -->
     <?php endif; ?>
@@ -74,7 +72,7 @@
                 </span>
             <?php endif; // End if $tags_list  ?>
         <?php endif; // End if 'post' == get_post_type() ?>
-
+                    
         <?php if (comments_open()) : ?>
             <?php if ($show_sep) : ?>
                 <span class="sep"> | </span>
@@ -83,10 +81,5 @@
         <?php endif; // End if comments_open()  ?>
 
         <?php edit_post_link(__('Edit', 'vestride'), '<span class="edit-link">', '</span>'); ?>
-        <nav id="nav-single">
-            <h3 class="ir"><?php _e('Post navigation', 'vestride'); ?></h3>
-            <span class="nav-previous"><?php previous_post_link('%link', __('<span class="meta-nav">&larr;</span> Previous', 'vestride')); ?></span>
-            <span class="nav-next"><?php next_post_link('%link', __('Next <span class="meta-nav">&rarr;</span>', 'vestride')); ?></span>
-        </nav><!-- #nav-single -->
     </footer><!-- #entry-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->

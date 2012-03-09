@@ -16,7 +16,7 @@ get_template_part('backdrop', 'small');
     <?php if (have_posts()) : ?>
 
         <header class="page-header">
-            <h1 class="page-title"><?php printf(__('Search Results for: %s', 'vestride'), '<span>' . get_search_query() . '</span>'); ?></h1>
+            <h1 class="page-title section-title text-right"><span><?php printf(__('Search Results for: %s', 'vestride'), '<span>' . get_search_query() . '</span>'); ?></span></h1>
         </header>
 
         <?php vestride_content_nav('nav-above'); ?>
@@ -40,7 +40,7 @@ get_template_part('backdrop', 'small');
 
         <article id="post-0" class="post no-results not-found">
             <header class="entry-header">
-                <h1 class="entry-title"><?php _e('Nothing Found', 'vestride'); ?></h1>
+                <h1 class="entry-title section-title text-right"><span><?php _e('Nothing Found', 'vestride'); ?></span></h1>
             </header><!-- .entry-header -->
 
             <div class="entry-content">

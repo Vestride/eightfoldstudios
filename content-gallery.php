@@ -63,7 +63,8 @@
         if ($categories_list):
             ?>
             <span class="cat-links">
-                <?php printf(__('<span class="%1$s">Posted in</span> %2$s', 'vestride'), 'entry-utility-prep entry-utility-prep-cat-links', $categories_list);
+                <?php
+                printf(__('<span class="%1$s">Posted in</span> %2$s', 'vestride'), 'entry-utility-prep entry-utility-prep-cat-links', $categories_list);
                 $show_sep = true;
                 ?>
             </span>
@@ -75,11 +76,12 @@
             if ($show_sep) :
                 ?>
                 <span class="sep"> | </span>
-                <?php endif; // End if $show_sep ?>
+            <?php endif; // End if $show_sep  ?>
             <span class="tag-links">
-            <?php printf(__('<span class="%1$s">Tagged</span> %2$s', 'vestride'), 'entry-utility-prep entry-utility-prep-tag-links', $tags_list);
-            $show_sep = true;
-            ?>
+                <?php
+                printf(__('<span class="%1$s">Tagged</span> %2$s', 'vestride'), 'entry-utility-prep entry-utility-prep-tag-links', $tags_list);
+                $show_sep = true;
+                ?>
             </span>
         <?php endif; // End if $tags_list ?>
 
@@ -91,10 +93,6 @@
         <?php endif; // End if comments_open()  ?>
 
         <?php edit_post_link(__('Edit', 'vestride'), '<span class="edit-link">', '</span>'); ?>
-            <nav id="nav-single">
-            <h3 class="ir"><?php _e('Project navigation', 'vestride'); ?></h3>
-            <span class="nav-previous"><?php previous_post_link('%link', __('<span class="meta-nav">&larr;</span> Previous', 'vestride')); ?></span>
-            <span class="nav-next"><?php next_post_link('%link', __('Next <span class="meta-nav">&rarr;</span>', 'vestride')); ?></span>
-        </nav><!-- #nav-single -->
+        <?php vestride_nav_single(); ?>
     </footer><!-- #entry-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->

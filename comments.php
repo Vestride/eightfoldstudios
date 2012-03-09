@@ -21,8 +21,8 @@
      * but don't kill the script entirely -- we still have
      * to fully load the template.
      */
-    return;
-endif;
+        return;
+    endif;
 ?>
 
 <?php // You can start editing here -- including this comment! ?>
@@ -36,7 +36,7 @@ endif;
 
     <?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : // are there comments to navigate through  ?>
         <nav id="comment-nav-above">
-            <h1 class="assistive-text"><?php _e('Comment navigation', 'vestride'); ?></h1>
+            <h1 class="ir"><?php _e('Comment navigation', 'vestride'); ?></h1>
             <div class="nav-previous"><?php previous_comments_link(__('&larr; Older Comments', 'vestride')); ?></div>
             <div class="nav-next"><?php next_comments_link(__('Newer Comments &rarr;', 'vestride')); ?></div>
         </nav>
@@ -56,7 +56,7 @@ endif;
 
     <?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : // are there comments to navigate through  ?>
         <nav id="comment-nav-below">
-            <h1 class="assistive-text"><?php _e('Comment navigation', 'vestride'); ?></h1>
+            <h1 class="ir"><?php _e('Comment navigation', 'vestride'); ?></h1>
             <div class="nav-previous"><?php previous_comments_link(__('&larr; Older Comments', 'vestride')); ?></div>
             <div class="nav-next"><?php next_comments_link(__('Newer Comments &rarr;', 'vestride')); ?></div>
         </nav>
