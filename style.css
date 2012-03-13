@@ -1536,10 +1536,6 @@ footer.entry-meta {
     border-bottom: 2px solid #2D2D2D;
 }
 
-#nav-single .nav-next {
-    margin-left: 100px;
-}
-
 
 
 /* =Comments
@@ -2014,7 +2010,7 @@ p.comment-form-comment {
     display: block;
     width: 58px;
     height: 59px;
-    background-position: -530px -249px;
+    background-position: -534px -255px;
 }
 
 .sprite-recent:hover,
@@ -2105,7 +2101,8 @@ p.comment-form-comment {
     padding-top: 9px;
     padding-left: 5px;
     padding-right: 2px;
-    
+    margin-right: 21px;
+
      -moz-transition: none;
        -o-transition: none;
   -webkit-transition: none;
@@ -2113,12 +2110,20 @@ p.comment-form-comment {
           transition: none;
 }
 
+.arrow:visited,
+#nav-single a:visited {
+    color: #F0F0F0;
+}
+
 .arrow-left,
 #nav-single .nav-previous a {
     padding-right: 5px;
     padding-left: 2px;
+    margin-right: 0;
+    margin-left: 21px;
     box-shadow: -4px 4px 0 #2D2D2D;
 }
+
     
 .arrow:before,
 #nav-single a:before {

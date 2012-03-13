@@ -6,7 +6,7 @@ $projects = vestride_get_project_posts();
     <section id="work">
         <h3 class="section-title text-right"><span>Work<span class="title-icon icon-briefcase"></span></span></h3>
         <div class="paginate">
-            <h2 class="short current-filter">Most Recent</h2>
+            <h2 class="short filter-title">Most Recent</h2>
             
             <div class="paginate-container">
                 <span class="pages">Page 0/0</span>
@@ -21,7 +21,7 @@ $projects = vestride_get_project_posts();
 
                 <div id="grid">
                     <?php foreach ($projects as $project): ?>
-                    <div class="item" data-key='<?= json_encode($project->category_slugs); ?>'>
+                    <div class="item" data-key='<?= json_encode($project->term_slugs); ?>'>
                         <div class="item-img"><? echo $project->img; ?></div>
                         <div class="item-details-container">
                             <div class="item-details">

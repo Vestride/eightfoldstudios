@@ -15,7 +15,7 @@ get_template_part('backdrop', 'small');
     <section id="blog">
         <h3 class="section-title text-right"><span>Downloads<span class="title-icon icon-download"></span></span></h3>
         
-        <?php $posts = new WP_Query(array('post_type' => 'post', 'posts_per_page' => -1, 'category_name' => 'download')); ?>
+        <?php $posts = new WP_Query(array('post_type' => 'post', 'posts_per_page' => -1, 'category_name' => 'downloads')); ?>
         <?php if ($posts->have_posts()) : ?>
         <div class="has-posts">
             <?php vestride_content_nav('nav-above'); ?>

@@ -142,10 +142,10 @@ function vestride_content_nav( $nav_id ) {
 
 function vestride_nav_single() {
     ?>
-    <nav id="nav-single" class="text-center">
+    <nav id="nav-single" class="clearfix">
         <h3 class="ir"><?php _e('Post navigation', 'vestride'); ?></h3>
         <span class="nav-previous"><?php previous_post_link('%link'); ?></span>
-        <span class="nav-next"><?php next_post_link('%link'); ?></span>
+        <span class="nav-next rfloat"><?php next_post_link('%link'); ?></span>
     </nav><!-- #nav-single -->
 <?php
 }
