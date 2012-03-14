@@ -926,6 +926,10 @@ nav .logo .main-color {
 #grid .item:hover .item-details-container {
     height: 221px;
     -webkit-transition-timing-function: cubic-bezier(.73,1.89,.45,.4);
+    -moz-transition-timing-function: cubic-bezier(.73,1.89,.45,.4);
+    -o-transition-timing-function: cubic-bezier(.73,1.89,.45,.4);
+    -ms-transition-timing-function: cubic-bezier(.73,1.89,.45,.4);
+    transition-timing-function: cubic-bezier(.73,1.89,.45,.4);
 }
 
 #grid .item-details {
@@ -943,19 +947,27 @@ nav .logo .main-color {
     opacity: 1;
 }
 
-#grid .item-title:hover {
+#grid .item-title a {
+    color: #F0F0F0;
+}
+
+#grid .item-title a:hover {
     color: #0AAAC8;
     text-decoration: underline;
-    
-     -moz-transition: all 0.2s ease-out;
-       -o-transition: all 0.2s ease-out;
-  -webkit-transition: all 0.2s ease-out;
-      -ms-transition: all 0.2s ease-out;
-          transition: all 0.2s ease-out;
 }
 
 #grid .item-post-excerpt {
     color: #9B9B9B;
+}
+
+#grid .item-link {
+    position: absolute;
+    bottom: 0;
+}
+
+#grid .item-link span {
+    margin-left: 10px;
+    margin-top: -3px;
 }
 
 /*=============================================*\

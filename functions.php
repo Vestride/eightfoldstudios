@@ -775,7 +775,6 @@ function vestride_header($page = 'home') {
                         <li><?= vestride_header_link('About Us', '#about', 'about', $page); ?></li>
                         <li><?= vestride_header_link('Work', '#work', 'work', $page); ?></li>
                         <li><?= vestride_header_link('Contact', '#contact', 'contact', $page); ?></li>
-                        <!--<li><?= vestride_header_link('Blog', '#blog', 'blog', $page); ?></li>-->
                     </ul>
                 </nav>
             </header>
